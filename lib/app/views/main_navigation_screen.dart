@@ -185,7 +185,7 @@ class MainNavigationScreen extends StatelessWidget {
                           radius: navController.currentIndex == 4 ? 14 : 12,
                           backgroundColor: Colors.white,
                           backgroundImage: const NetworkImage(
-                            'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+                            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
                           ),
                           child: navController.currentIndex == 4
                               ? Container(

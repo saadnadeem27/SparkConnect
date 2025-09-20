@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_text_styles.dart';
-import '../../constants/app_constants.dart';
 import '../../widgets/post_card.dart';
 import '../../widgets/story_list.dart';
 
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         'username': 'sarah_photography',
         'displayName': 'Sarah Wilson',
         'profileImage':
-            'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
       'content':
@@ -139,24 +138,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             title: Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Colors.white, Colors.white70],
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    'SparkConnect',
-                    style: AppTextStyles.h3.copyWith(
-                      background: Paint()
-                        ..shader = AppColors.primaryGradient.createShader(
-                          const Rect.fromLTWH(0, 0, 200, 70),
-                        ),
-                      color: Colors.transparent,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Text(
+                  'SparkConnect',
+                  style: AppTextStyles.h3.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],

@@ -43,7 +43,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
         'username': 'sarah_photography',
         'displayName': 'Sarah Wilson',
         'profileImage':
-            'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
       'message': 'started following you',

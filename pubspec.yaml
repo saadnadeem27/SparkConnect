@@ -70,8 +70,3 @@ flutter:
     - assets/icons/
     - assets/animations/
     - assets/logos/
-
-  fonts:
-    - family: CustomIcons
-      fonts:
-        - asset: assets/fonts/CustomIcons.ttf

@@ -27,7 +27,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     'username': 'your_username',
     'displayName': 'Your Name',
     'profileImage':
-        'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
     'isVerified': false,
   };
 
@@ -135,13 +135,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: GradientButton(
               text: 'Share',
               onPressed: _isPosting ? null : _createPost,
               isLoading: _isPosting,
-              height: 36,
-              width: 80,
+              height: 32,
+              width: 70,
             ),
           ),
         ],

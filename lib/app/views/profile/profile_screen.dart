@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     'bio':
         'Living life one post at a time ✨\nPhotographer & Content Creator\n📍 New York, NY',
     'profileImage':
-        'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=300&h=300&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
     'coverImage':
         'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop',
     'isVerified': false,
@@ -188,10 +188,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: [
                     // Cover Image & Profile Picture
                     Stack(
+                      clipBehavior: Clip.none, // Allow overflow for profile image
                       children: [
                         // Cover Image
                         Container(
-                          height: 150,
+                          height: 180, // Increased height for better proportion
                           width: double.infinity,
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -201,60 +202,187 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ),
                         ),
 
-                        // Profile Picture
+                        // Profile Picture with improved positioning
                         Positioned(
-                          bottom: -50,
-                          left: 20,
+                          bottom: -60, // Adjusted for better overlap
+                          left: MediaQuery.of(context).size.width * 0.05, // Responsive positioning
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 4),
+                              border: Border.all(color: Colors.white, width: 5), // Thicker border
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 4),
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 6),
+                                  spreadRadius: 2,
                                 ),
                               ],
                             ),
                             child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage:
-                                  NetworkImage(currentUser['profileImage']),
+                              radius: 60, // Larger radius for better visibility
+                              backgroundColor: Colors.grey[300], // Fallback color
+                              child: ClipOval(
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  child: Image.network(
+                                    currentUser['profileImage'],
+                                    width: 120,
+                                    height: 120,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        width: 120,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Colors.grey[300]!,
+                                              Colors.grey[400]!,
+                                            ],
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.person,
+                                          size: 60,
+                                          color: Colors.grey[600],
+                                        ),
+                                      );
+                                    },
+                                    loadingBuilder: (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Container(
+                                        width: 120,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Colors.grey[200]!,
+                                              Colors.grey[300]!,
+                                            ],
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                    loadingProgress.expectedTotalBytes!
+                                                : null,
+                                            strokeWidth: 3,
+                                            valueColor: AlwaysStoppedAnimation<Color>(
+                                              AppColors.primaryColor,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        // Edit Cover Button
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              onPressed: () {
+                                // Handle cover image edit
+                                _showImageOptionsDialog('cover');
+                              },
+                            ),
+                          ),
+                        ),
+
+                        // Edit Profile Picture Button
+                        Positioned(
+                          bottom: -40,
+                          left: MediaQuery.of(context).size.width * 0.05 + 80, // Responsive positioning over profile image
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                              onPressed: () {
+                                // Handle profile image edit
+                                _showImageOptionsDialog('profile');
+                              },
                             ),
                           ),
                         ),
                       ],
                     ),
 
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 80), // Increased spacing to accommodate larger profile image
 
-                    // User Info
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.defaultPadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                currentUser['displayName'],
-                                style: AppTextStyles.h3.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textPrimary,
+                    // User Info with fade-in animation
+                    AnimatedOpacity(
+                      opacity: 1.0,
+                      duration: const Duration(milliseconds: 600),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppConstants.defaultPadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    currentUser['displayName'],
+                                    style: AppTextStyles.h3.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textPrimary,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              if (currentUser['isVerified']) ...[
-                                const SizedBox(width: 8),
-                                const Icon(
-                                  Icons.verified,
-                                  color: AppColors.primaryColor,
-                                  size: 24,
-                                ),
+                                if (currentUser['isVerified']) ...[
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      Icons.verified,
+                                      color: Colors.white,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ],
                               ],
-                            ],
-                          ),
+                            ),
 
                           const SizedBox(height: 4),
 
@@ -346,7 +474,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                           const SizedBox(height: 20),
                         ],
                       ),
-                    ),
+                    ), // Close Padding
+                    ), // Close AnimatedOpacity
                   ],
                 ),
               ),
@@ -508,6 +637,117 @@ class _ProfileScreenState extends State<ProfileScreen>
           ),
         );
       },
+    );
+  }
+
+  void _showImageOptionsDialog(String imageType) {
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Change ${imageType == 'profile' ? 'Profile Picture' : 'Cover Photo'}',
+              style: AppTextStyles.h4.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.camera_alt,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              title: const Text('Take Photo'),
+              onTap: () {
+                Get.back();
+                // Handle camera functionality
+                Get.snackbar(
+                  'Camera',
+                  'Camera functionality would open here',
+                  backgroundColor: AppColors.primaryColor,
+                  colorText: Colors.white,
+                );
+              },
+            ),
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.secondaryColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.photo_library,
+                  color: AppColors.secondaryColor,
+                ),
+              ),
+              title: const Text('Choose from Gallery'),
+              onTap: () {
+                Get.back();
+                // Handle gallery functionality
+                Get.snackbar(
+                  'Gallery',
+                  'Gallery functionality would open here',
+                  backgroundColor: AppColors.secondaryColor,
+                  colorText: Colors.white,
+                );
+              },
+            ),
+            if (imageType == 'profile') ...[
+              ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+                title: const Text('Remove Photo'),
+                onTap: () {
+                  Get.back();
+                  // Handle remove functionality
+                  Get.snackbar(
+                    'Removed',
+                    'Profile picture removed',
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                },
+              ),
+            ],
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
     );
   }
 
