@@ -296,10 +296,10 @@ This project is created for portfolio demonstration purposes. Please contact for
 - 📱 Focus on user experience and code quality
 
 ### 🌐 **Connect With Me**
-- 💼 **Portfolio**: [Your Portfolio URL]
+<!-- - 💼 **Portfolio**: [Your Portfolio URL] -->
 - 💻 **GitHub**: [@saadnadeem27](https://github.com/saadnadeem27)
-- 📧 **Email**: [Your Email]
-- 💼 **LinkedIn**: [Your LinkedIn]
+<!-- - 📧 **Email**: [Your Email] -->
+- 💼 **LinkedIn**:(https://www.linkedin.com/in/saad-nadeem-07-an-expert-flutter-developer/)
 
 ---
 
