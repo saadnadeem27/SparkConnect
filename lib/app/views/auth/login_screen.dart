@@ -186,6 +186,8 @@ class LoginScreen extends StatelessWidget {
                                   icon: 'assets/icons/apple.png',
                                   label: 'Apple',
                                   onPressed: authController.signInWithApple,
+                                  backgroundColor: Colors.black,
+                                  textColor: Colors.white,
                                 ),
                               ),
                             ],
