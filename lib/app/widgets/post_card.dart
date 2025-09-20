@@ -26,7 +26,8 @@ class PostCard extends StatefulWidget {
   State<PostCard> createState() => _PostCardState();
 }
 
-class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin {
+class _PostCardState extends State<PostCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _likeAnimationController;
   late Animation<double> _likeAnimation;
   bool _showLikeAnimation = false;
@@ -82,7 +83,7 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     final user = widget.post['user'] as Map<String, dynamic>;
-    
+
     return Container(
       margin: const EdgeInsets.only(bottom: AppConstants.smallPadding),
       decoration: BoxDecoration(
@@ -108,11 +109,10 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: user['isVerified'] 
-                          ? AppColors.primaryGradient 
-                          : null,
-                      border: user['isVerified'] 
-                          ? null 
+                      gradient:
+                          user['isVerified'] ? AppColors.primaryGradient : null,
+                      border: user['isVerified']
+                          ? null
                           : Border.all(color: AppColors.borderColor, width: 2),
                     ),
                     padding: const EdgeInsets.all(2),
@@ -206,9 +206,10 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
               ],
             ),
           ),
-          
+
           // Content
-          if (widget.post['content'] != null && widget.post['content'].isNotEmpty) ...[
+          if (widget.post['content'] != null &&
+              widget.post['content'].isNotEmpty) ...[
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppConstants.defaultPadding,
@@ -222,7 +223,7 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
             ),
             const SizedBox(height: 12),
           ],
-          
+
           // Image/Video
           if (widget.post['imageUrl'] != null) ...[
             GestureDetector(
@@ -284,7 +285,7 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
               ),
             ),
           ],
-          
+
           // Action Buttons
           Padding(
             padding: const EdgeInsets.all(AppConstants.defaultPadding),
@@ -300,11 +301,11 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                         child: Row(
                           children: [
                             Icon(
-                              widget.post['isLiked'] 
-                                  ? Icons.favorite 
+                              widget.post['isLiked']
+                                  ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: widget.post['isLiked'] 
-                                  ? AppColors.likeColor 
+                              color: widget.post['isLiked']
+                                  ? AppColors.likeColor
                                   : AppColors.textSecondary,
                               size: 24,
                             ),
@@ -312,8 +313,8 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                             Text(
                               _formatCount(widget.post['likesCount']),
                               style: AppTextStyles.bodySmall.copyWith(
-                                color: widget.post['isLiked'] 
-                                    ? AppColors.likeColor 
+                                color: widget.post['isLiked']
+                                    ? AppColors.likeColor
                                     : AppColors.textSecondary,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -322,9 +323,9 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(width: 16),
-                    
+
                     // Comment Button
                     GestureDetector(
                       onTap: widget.onComment,
@@ -349,9 +350,9 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(width: 16),
-                    
+
                     // Share Button
                     GestureDetector(
                       onTap: widget.onShare,
@@ -376,20 +377,20 @@ class _PostCardState extends State<PostCard> with SingleTickerProviderStateMixin
                         ),
                       ),
                     ),
-                    
+
                     const Spacer(),
-                    
+
                     // Bookmark Button
                     GestureDetector(
                       onTap: widget.onBookmark,
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         child: Icon(
-                          widget.post['isBookmarked'] 
-                              ? Icons.bookmark 
+                          widget.post['isBookmarked']
+                              ? Icons.bookmark
                               : Icons.bookmark_border,
-                          color: widget.post['isBookmarked'] 
-                              ? AppColors.primaryColor 
+                          color: widget.post['isBookmarked']
+                              ? AppColors.primaryColor
                               : AppColors.textSecondary,
                           size: 24,
                         ),

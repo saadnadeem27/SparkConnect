@@ -13,7 +13,7 @@ class AppThemes {
         primaryColor: AppColors.primaryColor,
         scaffoldBackgroundColor: AppColors.backgroundColor,
         fontFamily: AppTextStyles.bodyLarge.fontFamily,
-        
+
         // Color Scheme
         colorScheme: const ColorScheme.light(
           primary: AppColors.primaryColor,
@@ -44,7 +44,8 @@ class AppThemes {
           color: AppColors.cardBackgroundColor,
           elevation: AppConstants.defaultElevation,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
           ),
           margin: const EdgeInsets.all(AppConstants.smallPadding),
         ),
@@ -60,7 +61,8 @@ class AppThemes {
               vertical: AppConstants.defaultPadding,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.defaultBorderRadius),
             ),
             textStyle: AppTextStyles.buttonMedium,
           ),
@@ -75,7 +77,8 @@ class AppThemes {
               vertical: AppConstants.smallPadding,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppConstants.smallBorderRadius),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.smallBorderRadius),
             ),
             textStyle: AppTextStyles.buttonMedium.copyWith(
               color: AppColors.primaryColor,
@@ -93,7 +96,8 @@ class AppThemes {
               vertical: AppConstants.defaultPadding,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.defaultBorderRadius),
             ),
             textStyle: AppTextStyles.buttonMedium.copyWith(
               color: AppColors.primaryColor,
@@ -107,23 +111,29 @@ class AppThemes {
           fillColor: AppColors.cardBackgroundColor,
           contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.borderColor),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.borderColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-            borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderSide:
+                const BorderSide(color: AppColors.primaryColor, width: 2),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.errorColor),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.errorColor, width: 2),
           ),
           labelStyle: AppTextStyles.bodyMedium.copyWith(
@@ -165,7 +175,8 @@ class AppThemes {
         // Snack Bar Theme
         snackBarTheme: SnackBarThemeData(
           backgroundColor: AppColors.textPrimary,
-          contentTextStyle: AppTextStyles.bodyMedium.copyWith(color: Colors.white),
+          contentTextStyle:
+              AppTextStyles.bodyMedium.copyWith(color: Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppConstants.smallBorderRadius),
           ),
@@ -222,7 +233,7 @@ class AppThemes {
         primaryColor: AppColors.primaryColor,
         scaffoldBackgroundColor: AppColors.darkBackgroundColor,
         fontFamily: AppTextStyles.bodyLarge.fontFamily,
-        
+
         // Color Scheme
         colorScheme: const ColorScheme.dark(
           primary: AppColors.primaryColor,
@@ -253,7 +264,8 @@ class AppThemes {
           color: AppColors.darkCardBackgroundColor,
           elevation: AppConstants.defaultElevation,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
           ),
           margin: const EdgeInsets.all(AppConstants.smallPadding),
         ),
@@ -269,7 +281,8 @@ class AppThemes {
               vertical: AppConstants.defaultPadding,
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.defaultBorderRadius),
             ),
             textStyle: AppTextStyles.buttonMedium,
           ),
@@ -281,16 +294,20 @@ class AppThemes {
           fillColor: AppColors.darkCardBackgroundColor,
           contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.darkBorderColor),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             borderSide: const BorderSide(color: AppColors.darkBorderColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-            borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderSide:
+                const BorderSide(color: AppColors.primaryColor, width: 2),
           ),
           labelStyle: AppTextStyles.bodyMediumDark.copyWith(
             color: AppColors.textDarkSecondary,

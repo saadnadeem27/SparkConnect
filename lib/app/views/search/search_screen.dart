@@ -12,18 +12,20 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin {
+class _SearchScreenState extends State<SearchScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
-  
+
   // Static data for demonstration
   final List<Map<String, dynamic>> staticUsers = [
     {
       'id': 'user1',
       'username': 'john_doe',
       'displayName': 'John Doe',
-      'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+      'profileImage':
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       'isVerified': true,
       'followersCount': 12500,
       'bio': 'Fitness enthusiast & lifestyle blogger',
@@ -33,7 +35,8 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
       'id': 'user2',
       'username': 'sarah_photography',
       'displayName': 'Sarah Wilson',
-      'profileImage': 'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+      'profileImage':
+          'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
       'isVerified': false,
       'followersCount': 8900,
       'bio': 'Photographer | Capturing life\'s moments',
@@ -43,14 +46,15 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
       'id': 'user3',
       'username': 'tech_explorer',
       'displayName': 'Alex Chen',
-      'profileImage': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      'profileImage':
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
       'isVerified': true,
       'followersCount': 25600,
       'bio': 'Software Developer | Tech Reviews',
       'isFollowing': false,
     },
   ];
-  
+
   final List<String> staticHashtags = [
     '#fitness',
     '#photography',
@@ -63,41 +67,47 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     '#nature',
     '#art',
   ];
-  
+
   final List<Map<String, dynamic>> staticTrendingPosts = [
     {
       'id': 'trending1',
-      'imageUrl': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop',
       'likesCount': 1234,
       'commentsCount': 56,
     },
     {
       'id': 'trending2',
-      'imageUrl': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
       'likesCount': 2847,
       'commentsCount': 89,
     },
     {
       'id': 'trending3',
-      'imageUrl': 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop',
       'likesCount': 891,
       'commentsCount': 34,
     },
     {
       'id': 'trending4',
-      'imageUrl': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=300&h=300&fit=crop',
       'likesCount': 567,
       'commentsCount': 78,
     },
     {
       'id': 'trending5',
-      'imageUrl': 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=300&h=300&fit=crop',
       'likesCount': 1567,
       'commentsCount': 123,
     },
     {
       'id': 'trending6',
-      'imageUrl': 'https://images.unsplash.com/photo-1506629905930-b0c00eddc6b4?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1506629905930-b0c00eddc6b4?w=300&h=300&fit=crop',
       'likesCount': 892,
       'commentsCount': 45,
     },
@@ -140,7 +150,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
               elevation: 0,
               backgroundColor: Colors.white,
               toolbarHeight: 70,
-              title: Container(
+              title: SizedBox(
                 height: 45,
                 child: CustomTextField(
                   controller: _searchController,
@@ -174,10 +184,10 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
           children: [
             // People Tab
             _buildPeopleTab(),
-            
+
             // Tags Tab
             _buildTagsTab(),
-            
+
             // Posts Tab
             _buildPostsTab(),
           ],
@@ -192,13 +202,14 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
       itemCount: staticUsers.length,
       itemBuilder: (context, index) {
         final user = staticUsers[index];
-        
+
         return Container(
           margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -216,11 +227,10 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: user['isVerified'] 
-                        ? AppColors.primaryGradient 
-                        : null,
-                    border: user['isVerified'] 
-                        ? null 
+                    gradient:
+                        user['isVerified'] ? AppColors.primaryGradient : null,
+                    border: user['isVerified']
+                        ? null
                         : Border.all(color: AppColors.borderColor, width: 2),
                   ),
                   padding: const EdgeInsets.all(2),
@@ -230,9 +240,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                   ),
                 ),
               ),
-              
               const SizedBox(width: 12),
-              
               Expanded(
                 child: GestureDetector(
                   onTap: () {
@@ -287,9 +295,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                   ),
                 ),
               ),
-              
               const SizedBox(width: 12),
-              
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -302,22 +308,19 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    gradient: user['isFollowing'] 
-                        ? null 
-                        : AppColors.primaryGradient,
-                    color: user['isFollowing'] 
-                        ? AppColors.surfaceColor 
-                        : null,
+                    gradient:
+                        user['isFollowing'] ? null : AppColors.primaryGradient,
+                    color: user['isFollowing'] ? AppColors.surfaceColor : null,
                     borderRadius: BorderRadius.circular(20),
-                    border: user['isFollowing'] 
-                        ? Border.all(color: AppColors.borderColor) 
+                    border: user['isFollowing']
+                        ? Border.all(color: AppColors.borderColor)
                         : null,
                   ),
                   child: Text(
                     user['isFollowing'] ? 'Following' : 'Follow',
                     style: AppTextStyles.bodySmall.copyWith(
-                      color: user['isFollowing'] 
-                          ? AppColors.textPrimary 
+                      color: user['isFollowing']
+                          ? AppColors.textPrimary
                           : Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
@@ -343,7 +346,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
       itemCount: staticHashtags.length,
       itemBuilder: (context, index) {
         final hashtag = staticHashtags[index];
-        
+
         return GestureDetector(
           onTap: () {
             Get.toNamed('/hashtag', arguments: hashtag);
@@ -351,7 +354,8 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
           child: Container(
             decoration: BoxDecoration(
               gradient: AppColors.primaryGradient,
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.defaultBorderRadius),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primaryColor.withOpacity(0.3),
@@ -386,7 +390,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
       itemCount: staticTrendingPosts.length,
       itemBuilder: (context, index) {
         final post = staticTrendingPosts[index];
-        
+
         return GestureDetector(
           onTap: () {
             Get.toNamed('/post-detail', arguments: post);
@@ -407,7 +411,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                   ),
                 ),
               ),
-              
+
               // Overlay with stats
               Positioned(
                 top: 8,

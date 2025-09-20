@@ -76,10 +76,13 @@ class AppConstants {
   static const String shareProfileUrl = 'sparkconnect.app/profile/';
 
   // Error Messages
-  static const String networkErrorMessage = 'Network error. Please check your connection.';
-  static const String serverErrorMessage = 'Server error. Please try again later.';
-  static const String unknownErrorMessage = 'Something went wrong. Please try again.';
-  
+  static const String networkErrorMessage =
+      'Network error. Please check your connection.';
+  static const String serverErrorMessage =
+      'Server error. Please try again later.';
+  static const String unknownErrorMessage =
+      'Something went wrong. Please try again.';
+
   // Success Messages
   static const String postCreatedMessage = 'Post created successfully!';
   static const String profileUpdatedMessage = 'Profile updated successfully!';

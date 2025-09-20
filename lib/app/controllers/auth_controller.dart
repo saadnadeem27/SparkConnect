@@ -19,7 +19,8 @@ class AuthController extends GetxController {
   // Form controllers for login/signup
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
 
@@ -89,7 +90,7 @@ class AuthController extends GetxController {
 
     try {
       _isLoading.value = true;
-      
+
       final response = await _authService.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text,
@@ -126,7 +127,7 @@ class AuthController extends GetxController {
 
     try {
       _isLoading.value = true;
-      
+
       final response = await _authService.signUpWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text,
@@ -159,10 +160,11 @@ class AuthController extends GetxController {
   }
 
   /// Sign up with email and password (alternative method name)
-  Future<void> signUpWithEmail(String email, String password, String name) async {
+  Future<void> signUpWithEmail(
+      String email, String password, String name) async {
     try {
       _isLoading.value = true;
-      
+
       final response = await _authService.signUpWithEmailAndPassword(
         email: email,
         password: password,
@@ -198,9 +200,9 @@ class AuthController extends GetxController {
   Future<void> signInWithGoogle() async {
     try {
       _isGoogleLoading.value = true;
-      
+
       final response = await _authService.signInWithGoogle();
-      
+
       if (response != null) {
         Get.offAllNamed(AppRoutes.home);
         Get.snackbar(
@@ -229,9 +231,9 @@ class AuthController extends GetxController {
   Future<void> signInWithApple() async {
     try {
       _isAppleLoading.value = true;
-      
+
       final response = await _authService.signInWithApple();
-      
+
       if (response != null) {
         Get.offAllNamed(AppRoutes.home);
         Get.snackbar(
@@ -271,9 +273,10 @@ class AuthController extends GetxController {
 
     try {
       _isLoading.value = true;
-      
-      final success = await _authService.resetPassword(emailController.text.trim());
-      
+
+      final success =
+          await _authService.resetPassword(emailController.text.trim());
+
       if (success) {
         Get.snackbar(
           'Success',
@@ -294,10 +297,10 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     try {
       _isLoading.value = true;
-      
+
       await _authService.signOut();
       _clearFormFields();
-      
+
       Get.offAllNamed(AppRoutes.login);
       Get.snackbar(
         'Success',
@@ -334,12 +337,12 @@ class AuthController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    
+
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
       return 'Please enter a valid email';
     }
-    
+
     return null;
   }
 
@@ -348,15 +351,15 @@ class AuthController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
-    
+
     if (value.length < 8) {
       return 'Password must be at least 8 characters';
     }
-    
+
     if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)').hasMatch(value)) {
       return 'Password must contain uppercase, lowercase, and number';
     }
-    
+
     return null;
   }
 
@@ -365,11 +368,11 @@ class AuthController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
     }
-    
+
     if (value != passwordController.text) {
       return 'Passwords do not match';
     }
-    
+
     return null;
   }
 
@@ -378,15 +381,15 @@ class AuthController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Display name is required';
     }
-    
+
     if (value.length < 2) {
       return 'Display name must be at least 2 characters';
     }
-    
+
     if (value.length > 50) {
       return 'Display name must be less than 50 characters';
     }
-    
+
     return null;
   }
 

@@ -98,17 +98,18 @@ class MessageModel {
       metadata: json['metadata'] as Map<String, dynamic>?,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
-      readAt: json['read_at'] != null 
-          ? DateTime.parse(json['read_at'] as String) 
+      readAt: json['read_at'] != null
+          ? DateTime.parse(json['read_at'] as String)
           : null,
-      deliveredAt: json['delivered_at'] != null 
-          ? DateTime.parse(json['delivered_at'] as String) 
+      deliveredAt: json['delivered_at'] != null
+          ? DateTime.parse(json['delivered_at'] as String)
           : null,
-      sender: json['sender'] != null 
+      sender: json['sender'] != null
           ? UserModel.fromJson(json['sender'] as Map<String, dynamic>)
           : null,
-      replyToMessage: json['reply_to_message'] != null 
-          ? MessageModel.fromJson(json['reply_to_message'] as Map<String, dynamic>)
+      replyToMessage: json['reply_to_message'] != null
+          ? MessageModel.fromJson(
+              json['reply_to_message'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -196,7 +197,8 @@ class MessageModel {
   bool get hasAttachment => attachmentUrl != null && attachmentUrl!.isNotEmpty;
 
   /// Check if message is media type
-  bool get isMedia => [MessageType.image, MessageType.video, MessageType.audio].contains(type);
+  bool get isMedia =>
+      [MessageType.image, MessageType.video, MessageType.audio].contains(type);
 
   /// Check if message is read
   bool get isRead => status == MessageStatus.read;
@@ -205,7 +207,8 @@ class MessageModel {
   bool get isDelivered => status == MessageStatus.delivered || isRead;
 
   /// Check if message is sent
-  bool get isSent => status != MessageStatus.sending && status != MessageStatus.failed;
+  bool get isSent =>
+      status != MessageStatus.sending && status != MessageStatus.failed;
 
   /// Check if message failed to send
   bool get isFailed => status == MessageStatus.failed;
@@ -216,16 +219,16 @@ class MessageModel {
   /// Get formatted file size
   String get formattedFileSize {
     if (attachmentSize == null) return '';
-    
+
     const units = ['B', 'KB', 'MB', 'GB'];
     double size = attachmentSize!.toDouble();
     int unitIndex = 0;
-    
+
     while (size >= 1024 && unitIndex < units.length - 1) {
       size /= 1024;
       unitIndex++;
     }
-    
+
     return '${size.toStringAsFixed(1)} ${units[unitIndex]}';
   }
 
@@ -233,7 +236,7 @@ class MessageModel {
   String get timeFormatted {
     final now = DateTime.now();
     final messageDate = createdAt;
-    
+
     if (now.day == messageDate.day &&
         now.month == messageDate.month &&
         now.year == messageDate.year) {
@@ -255,7 +258,7 @@ class MessageModel {
   /// Get message preview text
   String get previewText {
     if (isDeleted) return 'This message was deleted';
-    
+
     switch (type) {
       case MessageType.text:
         return content ?? '';

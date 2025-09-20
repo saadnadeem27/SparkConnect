@@ -12,9 +12,10 @@ class NotificationsScreen extends StatefulWidget {
   State<NotificationsScreen> createState() => _NotificationsScreenState();
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> with TickerProviderStateMixin {
+class _NotificationsScreenState extends State<NotificationsScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
-  
+
   // Static notification data
   final List<Map<String, dynamic>> staticNotifications = [
     {
@@ -24,11 +25,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         'id': 'user1',
         'username': 'john_doe',
         'displayName': 'John Doe',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
         'isVerified': true,
       },
       'message': 'liked your post',
-      'postThumbnail': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop',
+      'postThumbnail':
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=150&h=150&fit=crop',
       'createdAt': DateTime.now().subtract(const Duration(minutes: 30)),
       'isRead': false,
     },
@@ -39,7 +42,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         'id': 'user2',
         'username': 'sarah_photography',
         'displayName': 'Sarah Wilson',
-        'profileImage': 'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
       'message': 'started following you',
@@ -53,11 +57,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         'id': 'user3',
         'username': 'tech_explorer',
         'displayName': 'Alex Chen',
-        'profileImage': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
         'isVerified': true,
       },
       'message': 'commented on your post: "Amazing work! Keep it up 🔥"',
-      'postThumbnail': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=150&fit=crop',
+      'postThumbnail':
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=150&fit=crop',
       'createdAt': DateTime.now().subtract(const Duration(hours: 2)),
       'isRead': true,
     },
@@ -68,11 +74,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         'id': 'user4',
         'username': 'foodie_adventures',
         'displayName': 'Emma Rodriguez',
-        'profileImage': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
       'message': 'mentioned you in a post',
-      'postThumbnail': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=150&h=150&fit=crop',
+      'postThumbnail':
+          'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=150&h=150&fit=crop',
       'createdAt': DateTime.now().subtract(const Duration(hours: 4)),
       'isRead': true,
     },
@@ -83,7 +91,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         'id': 'user5',
         'username': 'travel_lover',
         'displayName': 'Mike Johnson',
-        'profileImage': 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
       'message': 'liked your story',
@@ -91,7 +100,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       'isRead': true,
     },
   ];
-  
+
   final List<Map<String, dynamic>> staticActivities = [
     {
       'id': '1',
@@ -244,7 +253,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
         children: [
           // All Notifications Tab
           _buildAllNotificationsTab(),
-          
+
           // Activity Tab
           _buildActivityTab(),
         ],
@@ -259,13 +268,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       itemBuilder: (context, index) {
         final notification = staticNotifications[index];
         final user = notification['user'] as Map<String, dynamic>;
-        
+
         return GestureDetector(
           onTap: () {
             setState(() {
               notification['isRead'] = true;
             });
-            
+
             // Navigate based on notification type
             if (notification['type'] == 'follow') {
               Get.toNamed('/user-profile', arguments: user);
@@ -277,9 +286,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
             margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
             padding: const EdgeInsets.all(AppConstants.defaultPadding),
             decoration: BoxDecoration(
-              color: notification['isRead'] ? Colors.white : AppColors.primaryColor.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
-              border: notification['isRead'] 
+              color: notification['isRead']
+                  ? Colors.white
+                  : AppColors.primaryColor.withOpacity(0.05),
+              borderRadius:
+                  BorderRadius.circular(AppConstants.defaultBorderRadius),
+              border: notification['isRead']
                   ? Border.all(color: AppColors.borderColor.withOpacity(0.5))
                   : Border.all(color: AppColors.primaryColor.withOpacity(0.2)),
               boxShadow: [
@@ -305,7 +317,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                       right: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _getNotificationIconColor(notification['type']),
+                          color:
+                              _getNotificationIconColor(notification['type']),
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 2),
                         ),
@@ -319,9 +332,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(width: 12),
-                
+
                 // Notification content
                 Expanded(
                   child: Column(
@@ -356,9 +369,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                             ),
                         ],
                       ),
-                      
                       const SizedBox(height: 2),
-                      
                       Text(
                         notification['message'],
                         style: AppTextStyles.bodyMedium.copyWith(
@@ -368,9 +379,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      
                       const SizedBox(height: 4),
-                      
                       Text(
                         timeago.format(notification['createdAt']),
                         style: AppTextStyles.bodySmall.copyWith(
@@ -380,7 +389,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     ],
                   ),
                 ),
-                
+
                 // Post thumbnail (if available)
                 if (notification['postThumbnail'] != null) ...[
                   const SizedBox(width: 12),
@@ -408,13 +417,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       itemCount: staticActivities.length,
       itemBuilder: (context, index) {
         final activity = staticActivities[index];
-        
+
         return Container(
           margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(AppConstants.defaultBorderRadius),
+            borderRadius:
+                BorderRadius.circular(AppConstants.defaultBorderRadius),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -438,9 +448,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                   size: 24,
                 ),
               ),
-              
+
               const SizedBox(width: 16),
-              
+
               // Activity content
               Expanded(
                 child: Column(
@@ -454,9 +464,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                         height: 1.3,
                       ),
                     ),
-                    
                     const SizedBox(height: 4),
-                    
                     Text(
                       timeago.format(activity['createdAt']),
                       style: AppTextStyles.bodySmall.copyWith(

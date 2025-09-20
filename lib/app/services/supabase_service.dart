@@ -4,11 +4,12 @@ import '../constants/app_constants.dart';
 /// Supabase client configuration and initialization
 class SupabaseService {
   static SupabaseClient? _client;
-  
+
   /// Get the Supabase client instance
   static SupabaseClient get client {
     if (_client == null) {
-      throw Exception('Supabase client not initialized. Call initialize() first.');
+      throw Exception(
+          'Supabase client not initialized. Call initialize() first.');
     }
     return _client!;
   }
@@ -29,7 +30,7 @@ class SupabaseService {
         retryAttempts: 3,
       ),
     );
-    
+
     _client = Supabase.instance.client;
   }
 
@@ -40,7 +41,7 @@ class SupabaseService {
   static bool get isAuthenticated => currentUser != null;
 
   /// Get auth state stream
-  static Stream<AuthState> get authStateChanges => 
+  static Stream<AuthState> get authStateChanges =>
       _client!.auth.onAuthStateChange;
 
   /// Sign out current user

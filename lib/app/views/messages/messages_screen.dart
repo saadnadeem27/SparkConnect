@@ -12,7 +12,7 @@ class MessagesScreen extends StatefulWidget {
 
 class _MessagesScreenState extends State<MessagesScreen> {
   final TextEditingController _searchController = TextEditingController();
-  
+
   // Mock conversations data
   final List<Map<String, dynamic>> conversations = [
     {
@@ -20,7 +20,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       'user': {
         'username': 'sarah_wilson',
         'fullName': 'Sarah Wilson',
-        'profileImage': 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
         'isOnline': true,
       },
       'lastMessage': {
@@ -36,7 +37,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       'user': {
         'username': 'mike_chen',
         'fullName': 'Mike Chen',
-        'profileImage': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
         'isOnline': false,
       },
       'lastMessage': {
@@ -52,7 +54,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       'user': {
         'username': 'emma_davis',
         'fullName': 'Emma Davis',
-        'profileImage': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         'isOnline': true,
       },
       'lastMessage': {
@@ -68,7 +71,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       'user': {
         'username': 'alex_turner',
         'fullName': 'Alex Turner',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
         'isOnline': false,
       },
       'lastMessage': {
@@ -84,7 +88,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
       'user': {
         'username': 'lisa_brown',
         'fullName': 'Lisa Brown',
-        'profileImage': 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
         'isOnline': true,
       },
       'lastMessage': {
@@ -100,7 +105,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   String _formatTimestamp(DateTime timestamp) {
     final now = DateTime.now();
     final difference = now.difference(timestamp);
-    
+
     if (difference.inMinutes < 60) {
       return '${difference.inMinutes}m';
     } else if (difference.inHours < 24) {
@@ -174,7 +179,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               ),
             ),
           ),
-          
+
           // Online Users
           Container(
             height: 90,
@@ -182,7 +187,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: conversations.where((c) => c['user']['isOnline']).length + 1,
+              itemCount:
+                  conversations.where((c) => c['user']['isOnline']).length + 1,
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return Container(
@@ -213,10 +219,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     ),
                   );
                 }
-                
-                final onlineUsers = conversations.where((c) => c['user']['isOnline']).toList();
+
+                final onlineUsers =
+                    conversations.where((c) => c['user']['isOnline']).toList();
                 final user = onlineUsers[index - 1]['user'];
-                
+
                 return Container(
                   margin: const EdgeInsets.only(right: 12),
                   child: Column(
@@ -247,7 +254,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        user['username'].length > 8 
+                        user['username'].length > 8
                             ? '${user['username'].substring(0, 8)}...'
                             : user['username'],
                         style: AppTextStyles.bodySmall.copyWith(
@@ -260,7 +267,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               },
             ),
           ),
-          
+
           // Conversations List
           Expanded(
             child: ListView.builder(
@@ -271,7 +278,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                 final user = conversation['user'];
                 final lastMessage = conversation['lastMessage'];
                 final unreadCount = conversation['unreadCount'];
-                
+
                 return Container(
                   margin: const EdgeInsets.only(bottom: 8),
                   decoration: BoxDecoration(
@@ -318,14 +325,18 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     title: Text(
                       user['fullName'],
                       style: AppTextStyles.bodyLarge.copyWith(
-                        fontWeight: unreadCount > 0 ? FontWeight.bold : FontWeight.w600,
+                        fontWeight:
+                            unreadCount > 0 ? FontWeight.bold : FontWeight.w600,
                       ),
                     ),
                     subtitle: Text(
                       lastMessage['text'],
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: unreadCount > 0 ? Colors.black87 : Colors.grey[600],
-                        fontWeight: unreadCount > 0 ? FontWeight.w500 : FontWeight.normal,
+                        color:
+                            unreadCount > 0 ? Colors.black87 : Colors.grey[600],
+                        fontWeight: unreadCount > 0
+                            ? FontWeight.w500
+                            : FontWeight.normal,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -337,8 +348,12 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         Text(
                           _formatTimestamp(lastMessage['timestamp']),
                           style: AppTextStyles.bodySmall.copyWith(
-                            color: unreadCount > 0 ? AppColors.primary : Colors.grey[600],
-                            fontWeight: unreadCount > 0 ? FontWeight.bold : FontWeight.normal,
+                            color: unreadCount > 0
+                                ? AppColors.primary
+                                : Colors.grey[600],
+                            fontWeight: unreadCount > 0
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                         ),
                         if (unreadCount > 0) ...[

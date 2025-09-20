@@ -73,16 +73,22 @@ class UserModel {
       isVerified: json['is_verified'] as bool? ?? false,
       isPrivate: json['is_private'] as bool? ?? false,
       isOnline: json['is_online'] as bool?,
-      lastSeen: json['last_seen'] != null ? DateTime.parse(json['last_seen'] as String) : null,
-      dateOfBirth: json['date_of_birth'] != null ? DateTime.parse(json['date_of_birth'] as String) : null,
+      lastSeen: json['last_seen'] != null
+          ? DateTime.parse(json['last_seen'] as String)
+          : null,
+      dateOfBirth: json['date_of_birth'] != null
+          ? DateTime.parse(json['date_of_birth'] as String)
+          : null,
       location: json['location'] as String?,
       website: json['website'] as String?,
       phoneNumber: json['phone_number'] as String?,
       emailVerified: json['email_verified'] as bool? ?? false,
       phoneVerified: json['phone_verified'] as bool? ?? false,
       twoFactorEnabled: json['two_factor_enabled'] as bool? ?? false,
-      pushNotificationsEnabled: json['push_notifications_enabled'] as bool? ?? true,
-      emailNotificationsEnabled: json['email_notifications_enabled'] as bool? ?? true,
+      pushNotificationsEnabled:
+          json['push_notifications_enabled'] as bool? ?? true,
+      emailNotificationsEnabled:
+          json['email_notifications_enabled'] as bool? ?? true,
       darkModeEnabled: json['dark_mode_enabled'] as bool? ?? false,
       languageCode: json['language_code'] as String? ?? 'en',
       timeZone: json['time_zone'] as String?,
@@ -175,8 +181,10 @@ class UserModel {
       emailVerified: emailVerified ?? this.emailVerified,
       phoneVerified: phoneVerified ?? this.phoneVerified,
       twoFactorEnabled: twoFactorEnabled ?? this.twoFactorEnabled,
-      pushNotificationsEnabled: pushNotificationsEnabled ?? this.pushNotificationsEnabled,
-      emailNotificationsEnabled: emailNotificationsEnabled ?? this.emailNotificationsEnabled,
+      pushNotificationsEnabled:
+          pushNotificationsEnabled ?? this.pushNotificationsEnabled,
+      emailNotificationsEnabled:
+          emailNotificationsEnabled ?? this.emailNotificationsEnabled,
       darkModeEnabled: darkModeEnabled ?? this.darkModeEnabled,
       languageCode: languageCode ?? this.languageCode,
       timeZone: timeZone ?? this.timeZone,
@@ -237,7 +245,7 @@ class UserModel {
     if (names.length >= 2) {
       return '${names[0][0]}${names[1][0]}'.toUpperCase();
     }
-    return displayName.length >= 2 
+    return displayName.length >= 2
         ? displayName.substring(0, 2).toUpperCase()
         : displayName.toUpperCase();
   }

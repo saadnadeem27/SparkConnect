@@ -203,13 +203,21 @@ class AppTextStyles {
   static TextStyle get h5Dark => h5.copyWith(color: AppColors.textDarkPrimary);
   static TextStyle get h6Dark => h6.copyWith(color: AppColors.textDarkPrimary);
 
-  static TextStyle get bodyLargeDark => bodyLarge.copyWith(color: AppColors.textDarkPrimary);
-  static TextStyle get bodyMediumDark => bodyMedium.copyWith(color: AppColors.textDarkPrimary);
-  static TextStyle get bodySmallDark => bodySmall.copyWith(color: AppColors.textDarkSecondary);
+  static TextStyle get bodyLargeDark =>
+      bodyLarge.copyWith(color: AppColors.textDarkPrimary);
+  static TextStyle get bodyMediumDark =>
+      bodyMedium.copyWith(color: AppColors.textDarkPrimary);
+  static TextStyle get bodySmallDark =>
+      bodySmall.copyWith(color: AppColors.textDarkSecondary);
 
-  static TextStyle get captionDark => caption.copyWith(color: AppColors.textDarkTertiary);
-  static TextStyle get usernameDark => username.copyWith(color: AppColors.textDarkPrimary);
-  static TextStyle get timestampDark => timestamp.copyWith(color: AppColors.textDarkTertiary);
-  static TextStyle get counterDark => counter.copyWith(color: AppColors.textDarkSecondary);
-  static TextStyle get appBarTitleDark => appBarTitle.copyWith(color: AppColors.textDarkPrimary);
+  static TextStyle get captionDark =>
+      caption.copyWith(color: AppColors.textDarkTertiary);
+  static TextStyle get usernameDark =>
+      username.copyWith(color: AppColors.textDarkPrimary);
+  static TextStyle get timestampDark =>
+      timestamp.copyWith(color: AppColors.textDarkTertiary);
+  static TextStyle get counterDark =>
+      counter.copyWith(color: AppColors.textDarkSecondary);
+  static TextStyle get appBarTitleDark =>
+      appBarTitle.copyWith(color: AppColors.textDarkPrimary);
 }

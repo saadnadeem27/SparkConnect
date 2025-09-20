@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _checkAuthAndNavigate() async {
     // Wait for animations to complete
     await Future.delayed(const Duration(milliseconds: 3000));
-    
+
     // Check authentication status
     final authController = Get.find<AuthController>();
     authController.checkAuthAndNavigate();
@@ -157,7 +157,8 @@ class _SplashScreenState extends State<SplashScreen>
                     width: 60,
                     height: 60,
                     child: CircularProgressIndicator(
-                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(Colors.white),
                       strokeWidth: 3,
                       backgroundColor: Colors.white.withOpacity(0.3),
                     ),

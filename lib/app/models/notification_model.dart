@@ -65,10 +65,10 @@ class NotificationModel {
       isRead: json['is_read'] as bool? ?? false,
       data: json['data'] as Map<String, dynamic>?,
       createdAt: DateTime.parse(json['created_at'] as String),
-      fromUser: json['from_user'] != null 
+      fromUser: json['from_user'] != null
           ? UserModel.fromJson(json['from_user'] as Map<String, dynamic>)
           : null,
-      post: json['post'] != null 
+      post: json['post'] != null
           ? PostModel.fromJson(json['post'] as Map<String, dynamic>)
           : null,
     );
@@ -235,7 +235,8 @@ class NotificationModel {
   }
 
   /// Check if notification should show avatar
-  bool get shouldShowAvatar => fromUser != null && type != NotificationType.system;
+  bool get shouldShowAvatar =>
+      fromUser != null && type != NotificationType.system;
 
   /// Check if notification can be dismissed
   bool get canDismiss => type != NotificationType.system;

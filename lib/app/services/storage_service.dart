@@ -27,19 +27,20 @@ class StorageService extends GetxService {
   }) async {
     try {
       final String filePath = folder != null ? '$folder/$fileName' : fileName;
-      
+
       final response = await _supabase.storage.from(bucket).upload(
-        filePath,
-        file,
-        fileOptions: FileOptions(
-          cacheControl: '3600',
-          upsert: false,
-          metadata: metadata,
-        ),
-      );
+            filePath,
+            file,
+            fileOptions: FileOptions(
+              cacheControl: '3600',
+              upsert: false,
+              metadata: metadata,
+            ),
+          );
 
       if (response.isNotEmpty) {
-        final String publicUrl = _supabase.storage.from(bucket).getPublicUrl(filePath);
+        final String publicUrl =
+            _supabase.storage.from(bucket).getPublicUrl(filePath);
         AppLogger.success('File uploaded successfully: $filePath');
         return publicUrl;
       } else {
@@ -63,20 +64,21 @@ class StorageService extends GetxService {
   }) async {
     try {
       final String filePath = folder != null ? '$folder/$fileName' : fileName;
-      
+
       final response = await _supabase.storage.from(bucket).uploadBinary(
-        filePath,
-        bytes,
-        fileOptions: FileOptions(
-          contentType: mimeType,
-          cacheControl: '3600',
-          upsert: false,
-          metadata: metadata,
-        ),
-      );
+            filePath,
+            bytes,
+            fileOptions: FileOptions(
+              contentType: mimeType,
+              cacheControl: '3600',
+              upsert: false,
+              metadata: metadata,
+            ),
+          );
 
       if (response.isNotEmpty) {
-        final String publicUrl = _supabase.storage.from(bucket).getPublicUrl(filePath);
+        final String publicUrl =
+            _supabase.storage.from(bucket).getPublicUrl(filePath);
         AppLogger.success('Bytes uploaded successfully: $filePath');
         return publicUrl;
       } else {
@@ -94,8 +96,9 @@ class StorageService extends GetxService {
     required String userId,
     required File imageFile,
   }) async {
-    final String fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(imageFile.path)}';
-    
+    final String fileName =
+        '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(imageFile.path)}';
+
     return uploadFile(
       bucket: AppConstants.profileBucket,
       fileName: fileName,
@@ -114,11 +117,12 @@ class StorageService extends GetxService {
     required List<File> imageFiles,
   }) async {
     final List<String> uploadedUrls = [];
-    
+
     for (int i = 0; i < imageFiles.length; i++) {
       final File imageFile = imageFiles[i];
-      final String fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}_$i.${path.extension(imageFile.path)}';
-      
+      final String fileName =
+          '${userId}_${DateTime.now().millisecondsSinceEpoch}_$i.${path.extension(imageFile.path)}';
+
       final String? url = await uploadFile(
         bucket: AppConstants.postsBucket,
         fileName: fileName,
@@ -129,12 +133,12 @@ class StorageService extends GetxService {
           'type': 'post_image',
         },
       );
-      
+
       if (url != null) {
         uploadedUrls.add(url);
       }
     }
-    
+
     AppLogger.success('Uploaded ${uploadedUrls.length} post images');
     return uploadedUrls;
   }
@@ -144,8 +148,9 @@ class StorageService extends GetxService {
     required String userId,
     required File videoFile,
   }) async {
-    final String fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(videoFile.path)}';
-    
+    final String fileName =
+        '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(videoFile.path)}';
+
     return uploadFile(
       bucket: AppConstants.postsBucket,
       fileName: fileName,
@@ -163,8 +168,9 @@ class StorageService extends GetxService {
     required String userId,
     required File imageFile,
   }) async {
-    final String fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(imageFile.path)}';
-    
+    final String fileName =
+        '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(imageFile.path)}';
+
     return uploadFile(
       bucket: AppConstants.storiesBucket,
       fileName: fileName,
@@ -173,7 +179,8 @@ class StorageService extends GetxService {
       metadata: {
         'user_id': userId,
         'type': 'story_image',
-        'expires_at': DateTime.now().add(AppConstants.storyDuration).toIso8601String(),
+        'expires_at':
+            DateTime.now().add(AppConstants.storyDuration).toIso8601String(),
       },
     );
   }
@@ -183,8 +190,9 @@ class StorageService extends GetxService {
     required String userId,
     required File videoFile,
   }) async {
-    final String fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(videoFile.path)}';
-    
+    final String fileName =
+        '${userId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(videoFile.path)}';
+
     return uploadFile(
       bucket: AppConstants.storiesBucket,
       fileName: fileName,
@@ -193,7 +201,8 @@ class StorageService extends GetxService {
       metadata: {
         'user_id': userId,
         'type': 'story_video',
-        'expires_at': DateTime.now().add(AppConstants.storyDuration).toIso8601String(),
+        'expires_at':
+            DateTime.now().add(AppConstants.storyDuration).toIso8601String(),
       },
     );
   }
@@ -204,8 +213,9 @@ class StorageService extends GetxService {
     required File file,
     required String messageId,
   }) async {
-    final String fileName = '${messageId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(file.path)}';
-    
+    final String fileName =
+        '${messageId}_${DateTime.now().millisecondsSinceEpoch}.${path.extension(file.path)}';
+
     return uploadFile(
       bucket: AppConstants.messagesBucket,
       fileName: fileName,
@@ -280,17 +290,17 @@ class StorageService extends GetxService {
     try {
       if (transform != null) {
         return _supabase.storage.from(bucket).getPublicUrl(
-          filePath,
-          transform: TransformOptions(
-            width: int.tryParse(transform['width'] ?? ''),
-            height: int.tryParse(transform['height'] ?? ''),
-            resize: ResizeMode.values.firstWhere(
-              (mode) => mode.name == transform['resize'],
-              orElse: () => ResizeMode.cover,
-            ),
-            quality: int.tryParse(transform['quality'] ?? '80'),
-          ),
-        );
+              filePath,
+              transform: TransformOptions(
+                width: int.tryParse(transform['width'] ?? ''),
+                height: int.tryParse(transform['height'] ?? ''),
+                resize: ResizeMode.values.firstWhere(
+                  (mode) => mode.name == transform['resize'],
+                  orElse: () => ResizeMode.cover,
+                ),
+                quality: int.tryParse(transform['quality'] ?? '80'),
+              ),
+            );
       } else {
         return _supabase.storage.from(bucket).getPublicUrl(filePath);
       }
@@ -309,21 +319,21 @@ class StorageService extends GetxService {
   }) async {
     try {
       final response = await _supabase.storage.from(bucket).createSignedUrl(
-        filePath,
-        expiresInSeconds,
-        transform: transform != null
-            ? TransformOptions(
-                width: int.tryParse(transform['width'] ?? ''),
-                height: int.tryParse(transform['height'] ?? ''),
-                resize: ResizeMode.values.firstWhere(
-                  (mode) => mode.name == transform['resize'],
-                  orElse: () => ResizeMode.cover,
-                ),
-                quality: int.tryParse(transform['quality'] ?? '80'),
-              )
-            : null,
-      );
-      
+            filePath,
+            expiresInSeconds,
+            transform: transform != null
+                ? TransformOptions(
+                    width: int.tryParse(transform['width'] ?? ''),
+                    height: int.tryParse(transform['height'] ?? ''),
+                    resize: ResizeMode.values.firstWhere(
+                      (mode) => mode.name == transform['resize'],
+                      orElse: () => ResizeMode.cover,
+                    ),
+                    quality: int.tryParse(transform['quality'] ?? '80'),
+                  )
+                : null,
+          );
+
       AppLogger.info('Signed URL created for: $filePath');
       return response;
     } catch (e) {
@@ -341,17 +351,17 @@ class StorageService extends GetxService {
   }) async {
     try {
       final response = await _supabase.storage.from(bucket).list(
-        path: folder,
-        searchOptions: SearchOptions(
-          limit: limit,
-          offset: offset,
-          sortBy: SortBy(
-            column: 'created_at',
-            order: 'desc',
-          ),
-        ),
-      );
-      
+            path: folder,
+            searchOptions: SearchOptions(
+              limit: limit,
+              offset: offset,
+              sortBy: SortBy(
+                column: 'created_at',
+                order: 'desc',
+              ),
+            ),
+          );
+
       AppLogger.info('Listed ${response.length} files from $bucket');
       return response;
     } catch (e) {
@@ -379,7 +389,8 @@ class StorageService extends GetxService {
     required String filePath,
   }) async {
     try {
-      final metadata = await getFileMetadata(bucket: bucket, filePath: filePath);
+      final metadata =
+          await getFileMetadata(bucket: bucket, filePath: filePath);
       return metadata?['size'] as int?;
     } catch (e) {
       AppLogger.error('Error getting file size: $e');
@@ -422,7 +433,7 @@ class StorageService extends GetxService {
           bucket: AppConstants.storiesBucket,
           filePath: file.name,
         );
-        
+
         if (metadata != null && metadata['expires_at'] != null) {
           final expiresAt = DateTime.parse(metadata['expires_at']);
           if (now.isAfter(expiresAt)) {
@@ -436,7 +447,8 @@ class StorageService extends GetxService {
           bucket: AppConstants.storiesBucket,
           filePaths: expiredFiles,
         );
-        AppLogger.success('Cleaned up ${expiredFiles.length} expired story files');
+        AppLogger.success(
+            'Cleaned up ${expiredFiles.length} expired story files');
       }
     } catch (e) {
       AppLogger.error('Error cleaning up expired stories: $e');

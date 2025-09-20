@@ -124,14 +124,14 @@ class _SocialLoginButtonState extends State<SocialLoginButton>
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: widget.label == 'Google' 
-                                ? AppColors.googleColor 
+                            color: widget.label == 'Google'
+                                ? AppColors.googleColor
                                 : AppColors.appleColor,
                             borderRadius: BorderRadius.circular(2),
                           ),
                           child: Icon(
-                            widget.label == 'Google' 
-                                ? Icons.g_mobiledata 
+                            widget.label == 'Google'
+                                ? Icons.g_mobiledata
                                 : Icons.apple,
                             color: Colors.white,
                             size: 16,

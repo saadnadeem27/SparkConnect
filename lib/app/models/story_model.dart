@@ -59,15 +59,15 @@ class StoryModel {
       viewsCount: json['views_count'] as int? ?? 0,
       isViewed: json['is_viewed'] as bool? ?? false,
       isOwn: json['is_own'] as bool? ?? false,
-      viewers: json['viewers'] != null 
+      viewers: json['viewers'] != null
           ? List<String>.from(json['viewers'] as List)
           : null,
-      duration: json['duration'] != null 
+      duration: json['duration'] != null
           ? Duration(seconds: json['duration'] as int)
           : null,
       createdAt: DateTime.parse(json['created_at'] as String),
       expiresAt: DateTime.parse(json['expires_at'] as String),
-      user: json['profiles'] != null 
+      user: json['profiles'] != null
           ? UserModel.fromJson(json['profiles'] as Map<String, dynamic>)
           : null,
     );
@@ -156,7 +156,7 @@ class StoryModel {
   /// Get formatted remaining time
   String get formattedRemainingTime {
     if (isExpired) return 'Expired';
-    
+
     final remaining = remainingTime;
     if (remaining.inHours > 0) {
       return '${remaining.inHours}h';
@@ -213,7 +213,9 @@ class StoryModel {
   /// Get story preview text
   String get previewText {
     if (content != null && content!.isNotEmpty) {
-      return content!.length > 50 ? '${content!.substring(0, 50)}...' : content!;
+      return content!.length > 50
+          ? '${content!.substring(0, 50)}...'
+          : content!;
     }
     switch (storyType) {
       case StoryType.image:

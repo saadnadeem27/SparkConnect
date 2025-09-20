@@ -12,21 +12,22 @@ class StoryViewerScreen extends StatefulWidget {
 
 class _StoryViewerScreenState extends State<StoryViewerScreen>
     with TickerProviderStateMixin {
-  
   late AnimationController _progressController;
   late PageController _pageController;
-  
+
   int currentStoryIndex = 0;
-  
+
   // Mock story data
   final List<Map<String, dynamic>> stories = [
     {
       'id': 'story1',
       'type': 'image',
-      'url': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop',
+      'url':
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop',
       'user': {
         'username': 'john_doe',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       },
       'timestamp': DateTime.now().subtract(const Duration(hours: 2)),
       'viewsCount': 1234,
@@ -34,10 +35,12 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
     {
       'id': 'story2',
       'type': 'image',
-      'url': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop',
+      'url':
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop',
       'user': {
         'username': 'john_doe',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       },
       'timestamp': DateTime.now().subtract(const Duration(hours: 1)),
       'viewsCount': 987,
@@ -45,10 +48,12 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
     {
       'id': 'story3',
       'type': 'image',
-      'url': 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=800&fit=crop',
+      'url':
+          'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=800&fit=crop',
       'user': {
         'username': 'john_doe',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       },
       'timestamp': DateTime.now().subtract(const Duration(minutes: 30)),
       'viewsCount': 567,
@@ -63,7 +68,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
       vsync: this,
     );
     _pageController = PageController();
-    
+
     _startStoryTimer();
   }
 
@@ -141,8 +146,8 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
               },
               itemBuilder: (context, index) {
                 final story = stories[index];
-                
-                return Container(
+
+                return SizedBox(
                   width: double.infinity,
                   height: double.infinity,
                   child: story['type'] == 'image'
@@ -163,7 +168,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
                 );
               },
             ),
-            
+
             // Navigation Areas
             Row(
               children: [
@@ -189,14 +194,15 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
                 ),
               ],
             ),
-            
+
             // Top Overlay
             SafeArea(
               child: Column(
                 children: [
                   // Progress Indicators
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: Row(
                       children: List.generate(
                         stories.length,
@@ -227,7 +233,8 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(1.5),
+                                        borderRadius:
+                                            BorderRadius.circular(1.5),
                                       ),
                                     ),
                                   );
@@ -239,10 +246,11 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
                       ),
                     ),
                   ),
-                  
+
                   // User Info Header
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Row(
                       children: [
                         CircleAvatar(
@@ -285,7 +293,7 @@ class _StoryViewerScreenState extends State<StoryViewerScreen>
                 ],
               ),
             ),
-            
+
             // Bottom Overlay
             Positioned(
               bottom: 0,

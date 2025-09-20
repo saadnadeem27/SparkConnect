@@ -19,7 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     with TickerProviderStateMixin {
   final AuthController _authController = Get.find<AuthController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
+
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
@@ -31,12 +31,12 @@ class _SignUpScreenState extends State<SignUpScreen>
   @override
   void initState() {
     super.initState();
-    
+
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -157,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 20),
-                    
+
                     // Back Button
                     Align(
                       alignment: Alignment.centerLeft,
@@ -169,9 +169,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Header
                     Text(
                       'Create Account',
@@ -181,9 +181,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     const SizedBox(height: 8),
-                    
+
                     Text(
                       'Join SparkConnect and start connecting with friends',
                       style: AppTextStyles.bodyMedium.copyWith(
@@ -191,12 +191,13 @@ class _SignUpScreenState extends State<SignUpScreen>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     const SizedBox(height: 40),
-                    
+
                     // Sign Up Form
                     Container(
-                      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                      padding:
+                          const EdgeInsets.all(AppConstants.defaultPadding),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(
@@ -224,9 +225,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                               textCapitalization: TextCapitalization.words,
                               validator: _validateName,
                             ),
-                            
+
                             const SizedBox(height: AppConstants.defaultPadding),
-                            
+
                             // Email Field
                             CustomTextField(
                               controller: _authController.emailController,
@@ -236,9 +237,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                               keyboardType: TextInputType.emailAddress,
                               validator: _validateEmail,
                             ),
-                            
+
                             const SizedBox(height: AppConstants.defaultPadding),
-                            
+
                             // Password Field
                             CustomTextField(
                               controller: _authController.passwordController,
@@ -252,12 +253,13 @@ class _SignUpScreenState extends State<SignUpScreen>
                               onSuffixIconPressed: _togglePasswordVisibility,
                               validator: _validatePassword,
                             ),
-                            
+
                             const SizedBox(height: AppConstants.defaultPadding),
-                            
+
                             // Confirm Password Field
                             CustomTextField(
-                              controller: _authController.confirmPasswordController,
+                              controller:
+                                  _authController.confirmPasswordController,
                               hintText: 'Confirm your password',
                               labelText: 'Confirm Password',
                               prefixIcon: Icons.lock_outline,
@@ -265,22 +267,23 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility_outlined,
                               obscureText: _obscureConfirmPassword,
-                              onSuffixIconPressed: _toggleConfirmPasswordVisibility,
+                              onSuffixIconPressed:
+                                  _toggleConfirmPasswordVisibility,
                               validator: _validateConfirmPassword,
                             ),
-                            
+
                             const SizedBox(height: 24),
-                            
+
                             // Sign Up Button
                             Obx(() => GradientButton(
-                              text: 'Create Account',
-                              onPressed: _signUp,
-                              isLoading: _authController.isLoading.value,
-                              gradient: AppColors.primaryGradient,
-                            )),
-                            
+                                  text: 'Create Account',
+                                  onPressed: _signUp,
+                                  isLoading: _authController.isLoading.value,
+                                  gradient: AppColors.primaryGradient,
+                                )),
+
                             const SizedBox(height: 20),
-                            
+
                             // Divider
                             Row(
                               children: [
@@ -309,30 +312,33 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 ),
                               ],
                             ),
-                            
+
                             const SizedBox(height: 20),
-                            
+
                             // Social Login Buttons
                             Row(
                               children: [
                                 Expanded(
                                   child: Obx(() => SocialLoginButton(
-                                    icon: 'google',
-                                    label: 'Google',
-                                    onPressed: _signUpWithGoogle,
-                                    isLoading: _authController.isGoogleLoading.value,
-                                  )),
+                                        icon: 'google',
+                                        label: 'Google',
+                                        onPressed: _signUpWithGoogle,
+                                        isLoading: _authController
+                                            .isGoogleLoading.value,
+                                      )),
                                 ),
-                                const SizedBox(width: AppConstants.smallPadding),
+                                const SizedBox(
+                                    width: AppConstants.smallPadding),
                                 Expanded(
                                   child: Obx(() => SocialLoginButton(
-                                    icon: 'apple',
-                                    label: 'Apple',
-                                    onPressed: _signUpWithApple,
-                                    isLoading: _authController.isAppleLoading.value,
-                                    backgroundColor: Colors.black,
-                                    textColor: Colors.white,
-                                  )),
+                                        icon: 'apple',
+                                        label: 'Apple',
+                                        onPressed: _signUpWithApple,
+                                        isLoading: _authController
+                                            .isAppleLoading.value,
+                                        backgroundColor: Colors.black,
+                                        textColor: Colors.white,
+                                      )),
                                 ),
                               ],
                             ),
@@ -340,9 +346,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Sign In Link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -366,7 +372,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                         ),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 20),
                   ],
                 ),

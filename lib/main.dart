@@ -5,7 +5,7 @@ import 'app/routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   runApp(const SparkConnectApp());
 }
 

@@ -18,7 +18,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     with TickerProviderStateMixin {
   final AuthController _authController = Get.find<AuthController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
+
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
@@ -27,12 +27,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
   @override
   void initState() {
     super.initState();
-    
+
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
@@ -99,7 +99,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 20),
-                    
+
                     // Back Button
                     Align(
                       alignment: Alignment.centerLeft,
@@ -111,9 +111,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 40),
-                    
+
                     // Header
                     Text(
                       'Forgot Password?',
@@ -123,9 +123,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     const SizedBox(height: 8),
-                    
+
                     Text(
                       'Don\'t worry! Enter your email address below and we\'ll send you a password reset link.',
                       style: AppTextStyles.bodyMedium.copyWith(
@@ -133,12 +133,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    
+
                     const SizedBox(height: 60),
-                    
+
                     // Reset Password Form
                     Container(
-                      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                      padding:
+                          const EdgeInsets.all(AppConstants.defaultPadding),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(
@@ -165,19 +166,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                               keyboardType: TextInputType.emailAddress,
                               validator: _validateEmail,
                             ),
-                            
+
                             const SizedBox(height: 24),
-                            
+
                             // Reset Password Button
                             Obx(() => GradientButton(
-                              text: 'Send Reset Link',
-                              onPressed: _resetPassword,
-                              isLoading: _authController.isLoading.value,
-                              gradient: AppColors.primaryGradient,
-                            )),
-                            
+                                  text: 'Send Reset Link',
+                                  onPressed: _resetPassword,
+                                  isLoading: _authController.isLoading.value,
+                                  gradient: AppColors.primaryGradient,
+                                )),
+
                             const SizedBox(height: 20),
-                            
+
                             // Info Text
                             Container(
                               padding: const EdgeInsets.all(16),
@@ -210,9 +211,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                         ),
                       ),
                     ),
-                    
+
                     const SizedBox(height: 40),
-                    
+
                     // Back to Login Link
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +237,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                         ),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 20),
                   ],
                 ),

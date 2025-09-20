@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
-    
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -123,7 +123,8 @@ class LoginScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
-                              onPressed: authController.navigateToForgotPassword,
+                              onPressed:
+                                  authController.navigateToForgotPassword,
                               child: Text(
                                 'Forgot Password?',
                                 style: AppTextStyles.bodySmall.copyWith(
@@ -139,8 +140,8 @@ class LoginScreen extends StatelessWidget {
                           // Sign In Button
                           Obx(() => GradientButton(
                                 text: 'Sign In',
-                                onPressed: authController.isLoading.value 
-                                    ? null 
+                                onPressed: authController.isLoading.value
+                                    ? null
                                     : authController.signInWithEmailAndPassword,
                                 isLoading: authController.isLoading.value,
                               )),
@@ -178,7 +179,8 @@ class LoginScreen extends StatelessWidget {
                                   onPressed: authController.signInWithGoogle,
                                 ),
                               ),
-                              const SizedBox(width: AppConstants.defaultPadding),
+                              const SizedBox(
+                                  width: AppConstants.defaultPadding),
                               Expanded(
                                 child: SocialLoginButton(
                                   icon: 'assets/icons/apple.png',

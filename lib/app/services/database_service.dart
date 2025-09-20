@@ -40,7 +40,7 @@ class DatabaseService extends GetxService {
 
       // Apply ordering, pagination etc.
       dynamic finalQuery = query;
-      
+
       if (orderBy != null) {
         finalQuery = finalQuery.order(orderBy, ascending: ascending);
       }
@@ -48,9 +48,10 @@ class DatabaseService extends GetxService {
       if (limit != null) {
         finalQuery = finalQuery.limit(limit);
       }
-      
+
       if (offset != null) {
-        finalQuery = finalQuery.range(offset, offset + (limit ?? AppConstants.defaultPageSize) - 1);
+        finalQuery = finalQuery.range(
+            offset, offset + (limit ?? AppConstants.defaultPageSize) - 1);
       }
 
       final response = await finalQuery;
@@ -68,12 +69,9 @@ class DatabaseService extends GetxService {
     required Map<String, dynamic> data,
   }) async {
     try {
-      final response = await _supabase
-          .from(table)
-          .insert(data)
-          .select()
-          .single();
-      
+      final response =
+          await _supabase.from(table).insert(data).select().single();
+
       AppLogger.database('Inserted data into $table');
       return response;
     } catch (e) {
@@ -130,12 +128,9 @@ class DatabaseService extends GetxService {
   /// Get user profile by ID
   Future<Map<String, dynamic>?> getUserProfile(String userId) async {
     try {
-      final response = await _supabase
-          .from('profiles')
-          .select()
-          .eq('id', userId)
-          .single();
-      
+      final response =
+          await _supabase.from('profiles').select().eq('id', userId).single();
+
       AppLogger.database('Fetched user profile for $userId');
       return response;
     } catch (e) {
@@ -166,9 +161,7 @@ class DatabaseService extends GetxService {
     int offset = 0,
   }) async {
     try {
-      var query = _supabase
-          .from('posts')
-          .select('''
+      var query = _supabase.from('posts').select('''
             *,
             profiles:user_id (
               id,
@@ -244,8 +237,9 @@ class DatabaseService extends GetxService {
             .eq('user_id', userId);
 
         // Decrement likes count
-        await _supabase.rpc('decrement_likes_count', params: {'post_id': postId});
-        
+        await _supabase
+            .rpc('decrement_likes_count', params: {'post_id': postId});
+
         AppLogger.database('Post unliked');
         return false;
       } else {
@@ -257,8 +251,9 @@ class DatabaseService extends GetxService {
         });
 
         // Increment likes count
-        await _supabase.rpc('increment_likes_count', params: {'post_id': postId});
-        
+        await _supabase
+            .rpc('increment_likes_count', params: {'post_id': postId});
+
         AppLogger.database('Post liked');
         return true;
       }
@@ -287,10 +282,11 @@ class DatabaseService extends GetxService {
     };
 
     final result = await insertData(table: 'comments', data: commentData);
-    
+
     if (result != null) {
       // Increment comments count
-      await _supabase.rpc('increment_comments_count', params: {'post_id': postId});
+      await _supabase
+          .rpc('increment_comments_count', params: {'post_id': postId});
     }
 
     return result;
@@ -345,9 +341,11 @@ class DatabaseService extends GetxService {
             .eq('following_id', followingId);
 
         // Update counts
-        await _supabase.rpc('decrement_following_count', params: {'user_id': followerId});
-        await _supabase.rpc('decrement_followers_count', params: {'user_id': followingId});
-        
+        await _supabase
+            .rpc('decrement_following_count', params: {'user_id': followerId});
+        await _supabase
+            .rpc('decrement_followers_count', params: {'user_id': followingId});
+
         AppLogger.database('User unfollowed');
         return false;
       } else {
@@ -359,9 +357,11 @@ class DatabaseService extends GetxService {
         });
 
         // Update counts
-        await _supabase.rpc('increment_following_count', params: {'user_id': followerId});
-        await _supabase.rpc('increment_followers_count', params: {'user_id': followingId});
-        
+        await _supabase
+            .rpc('increment_following_count', params: {'user_id': followerId});
+        await _supabase
+            .rpc('increment_followers_count', params: {'user_id': followingId});
+
         AppLogger.database('User followed');
         return true;
       }

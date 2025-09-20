@@ -113,9 +113,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Account Settings
             _buildSectionHeader('Account'),
             const SizedBox(height: 12),
@@ -139,9 +139,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {},
               ),
             ]),
-            
+
             const SizedBox(height: 24),
-            
+
             // Preferences
             _buildSectionHeader('Preferences'),
             const SizedBox(height: 12),
@@ -180,9 +180,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
             ]),
-            
+
             const SizedBox(height: 24),
-            
+
             // Content Settings
             _buildSectionHeader('Content'),
             const SizedBox(height: 12),
@@ -206,9 +206,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {},
               ),
             ]),
-            
+
             const SizedBox(height: 24),
-            
+
             // Support
             _buildSectionHeader('Support'),
             const SizedBox(height: 12),
@@ -232,9 +232,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {},
               ),
             ]),
-            
+
             const SizedBox(height: 24),
-            
+
             // Logout Button
             Container(
               width: double.infinity,
@@ -266,7 +266,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
           ],
         ),

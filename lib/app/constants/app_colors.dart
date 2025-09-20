@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Primary Colors - Gradient-based
   static const Color primaryColor = Color(0xFF6C63FF);
-  static const Color primary = Color(0xFF6C63FF);  // Alias for compatibility
+  static const Color primary = Color(0xFF6C63FF); // Alias for compatibility
   static const Color secondaryColor = Color(0xFF4FACFE);
   static const Color accentColor = Color(0xFF00F2FE);
-  
+
   // Gradient Colors
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primaryColor, secondaryColor],
@@ -36,7 +36,8 @@ class AppColors {
 
   // Background Colors
   static const Color backgroundColor = Color(0xFFF8F9FA);
-  static const Color backgroundLight = Color(0xFFF8F9FA);  // Alias for compatibility
+  static const Color backgroundLight =
+      Color(0xFFF8F9FA); // Alias for compatibility
   static const Color darkBackgroundColor = Color(0xFF121212);
   static const Color cardBackgroundColor = Color(0xFFFFFFFF);
   static const Color darkCardBackgroundColor = Color(0xFF1E1E1E);
@@ -61,7 +62,7 @@ class AppColors {
   static const Color dividerColor = Color(0xFFEDF2F7);
   static const Color shadowColor = Color(0x1A000000);
   static const Color surfaceColor = Color(0xFFF7FAFC);
-  
+
   // Like/Heart Colors
   static const Color likeColor = Color(0xFFE53E3E);
   static const Color unlikeColor = Color(0xFFA0AEC0);

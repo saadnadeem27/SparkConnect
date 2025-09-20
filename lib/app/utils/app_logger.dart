@@ -32,7 +32,8 @@ class AppLogger {
   }
 
   /// Log an error message
-  static void error(String message, [String? tag, Object? error, StackTrace? stackTrace]) {
+  static void error(String message,
+      [String? tag, Object? error, StackTrace? stackTrace]) {
     developer.log(
       '❌ $message',
       name: tag ?? _appName,

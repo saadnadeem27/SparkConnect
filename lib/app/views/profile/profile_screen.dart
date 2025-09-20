@@ -12,18 +12,22 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
+class _ProfileScreenState extends State<ProfileScreen>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   final AuthController authController = Get.find<AuthController>();
-  
+
   // Mock current user data
   final Map<String, dynamic> currentUser = {
     'id': 'current_user',
     'username': 'your_username',
     'displayName': 'Your Name',
-    'bio': 'Living life one post at a time ✨\nPhotographer & Content Creator\n📍 New York, NY',
-    'profileImage': 'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=300&h=300&fit=crop&crop=face',
-    'coverImage': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop',
+    'bio':
+        'Living life one post at a time ✨\nPhotographer & Content Creator\n📍 New York, NY',
+    'profileImage':
+        'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=300&h=300&fit=crop&crop=face',
+    'coverImage':
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop',
     'isVerified': false,
     'postsCount': 128,
     'followersCount': 12500,
@@ -31,41 +35,47 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
     'website': 'www.yourwebsite.com',
     'joinedDate': DateTime(2023, 1, 15),
   };
-  
+
   final List<Map<String, dynamic>> userPosts = [
     {
       'id': '1',
-      'imageUrl': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop',
       'likesCount': 1234,
       'commentsCount': 56,
     },
     {
       'id': '2',
-      'imageUrl': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop',
       'likesCount': 2847,
       'commentsCount': 89,
     },
     {
       'id': '3',
-      'imageUrl': 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=300&h=300&fit=crop',
       'likesCount': 891,
       'commentsCount': 34,
     },
     {
       'id': '4',
-      'imageUrl': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=300&h=300&fit=crop',
       'likesCount': 567,
       'commentsCount': 78,
     },
     {
       'id': '5',
-      'imageUrl': 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=300&h=300&fit=crop',
       'likesCount': 1567,
       'commentsCount': 123,
     },
     {
       'id': '6',
-      'imageUrl': 'https://images.unsplash.com/photo-1506629905930-b0c00eddc6b4?w=300&h=300&fit=crop',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1506629905930-b0c00eddc6b4?w=300&h=300&fit=crop',
       'likesCount': 892,
       'commentsCount': 45,
     },
@@ -169,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 ),
               ],
             ),
-            
+
             // Profile Header
             SliverToBoxAdapter(
               child: Container(
@@ -190,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                             ),
                           ),
                         ),
-                        
+
                         // Profile Picture
                         Positioned(
                           bottom: -50,
@@ -209,18 +219,20 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                             ),
                             child: CircleAvatar(
                               radius: 50,
-                              backgroundImage: NetworkImage(currentUser['profileImage']),
+                              backgroundImage:
+                                  NetworkImage(currentUser['profileImage']),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 60),
-                    
+
                     // User Info
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AppConstants.defaultPadding),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppConstants.defaultPadding),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -243,18 +255,18 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               ],
                             ],
                           ),
-                          
+
                           const SizedBox(height: 4),
-                          
+
                           Text(
                             '@${currentUser['username']}',
                             style: AppTextStyles.bodyMedium.copyWith(
                               color: AppColors.textSecondary,
                             ),
                           ),
-                          
+
                           const SizedBox(height: 12),
-                          
+
                           Text(
                             currentUser['bio'],
                             style: AppTextStyles.bodyMedium.copyWith(
@@ -262,28 +274,31 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               height: 1.4,
                             ),
                           ),
-                          
+
                           const SizedBox(height: 16),
-                          
+
                           // Stats Row
                           Row(
                             children: [
-                              _buildStatItem('Posts', currentUser['postsCount']),
+                              _buildStatItem(
+                                  'Posts', currentUser['postsCount']),
                               const SizedBox(width: 24),
                               GestureDetector(
                                 onTap: () => Get.toNamed('/followers'),
-                                child: _buildStatItem('Followers', currentUser['followersCount']),
+                                child: _buildStatItem(
+                                    'Followers', currentUser['followersCount']),
                               ),
                               const SizedBox(width: 24),
                               GestureDetector(
                                 onTap: () => Get.toNamed('/following'),
-                                child: _buildStatItem('Following', currentUser['followingCount']),
+                                child: _buildStatItem(
+                                    'Following', currentUser['followingCount']),
                               ),
                             ],
                           ),
-                          
+
                           const SizedBox(height: 20),
-                          
+
                           // Action Buttons
                           Row(
                             children: [
@@ -291,7 +306,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                                 child: GestureDetector(
                                   onTap: () => Get.toNamed('/edit-profile'),
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
                                     decoration: BoxDecoration(
                                       gradient: AppColors.primaryGradient,
                                       borderRadius: BorderRadius.circular(25),
@@ -307,15 +323,14 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                                   ),
                                 ),
                               ),
-                              
                               const SizedBox(width: 12),
-                              
                               GestureDetector(
                                 onTap: () => Get.toNamed('/settings'),
                                 child: Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: AppColors.borderColor),
+                                    border: Border.all(
+                                        color: AppColors.borderColor),
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   child: Icon(
@@ -327,7 +342,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                               ),
                             ],
                           ),
-                          
+
                           const SizedBox(height: 20),
                         ],
                       ),
@@ -336,7 +351,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                 ),
               ),
             ),
-            
+
             // Tab Bar
             SliverPersistentHeader(
               pinned: true,
@@ -366,10 +381,10 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
           children: [
             // Posts Tab
             _buildPostsGrid(userPosts),
-            
+
             // Saved Tab
             _buildPostsGrid(userPosts.take(3).toList()),
-            
+
             // Tagged Tab
             _buildPostsGrid(userPosts.take(2).toList()),
           ],
@@ -433,7 +448,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       itemCount: posts.length,
       itemBuilder: (context, index) {
         final post = posts[index];
-        
+
         return GestureDetector(
           onTap: () {
             Get.toNamed('/post-detail', arguments: post);
@@ -454,7 +469,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                   ),
                 ),
               ),
-              
+
               // Overlay with stats
               Positioned(
                 top: 8,
@@ -545,12 +560,13 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get minExtent => _tabBar.preferredSize.height;
-  
+
   @override
   double get maxExtent => _tabBar.preferredSize.height;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: Colors.white,
       child: _tabBar,

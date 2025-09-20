@@ -92,7 +92,7 @@ class _GradientButtonState extends State<GradientButton>
             child: Container(
               width: widget.width,
               height: widget.height ?? 50,
-              padding: widget.padding ?? 
+              padding: widget.padding ??
                   const EdgeInsets.symmetric(
                     horizontal: AppConstants.largePadding,
                     vertical: AppConstants.defaultPadding,
@@ -103,7 +103,7 @@ class _GradientButtonState extends State<GradientButton>
                         colors: [Colors.grey, Colors.grey],
                       )
                     : widget.gradient ?? AppColors.primaryGradient,
-                borderRadius: widget.borderRadius ?? 
+                borderRadius: widget.borderRadius ??
                     BorderRadius.circular(AppConstants.defaultBorderRadius),
                 boxShadow: widget.onPressed == null || widget.isLoading
                     ? null
@@ -121,7 +121,8 @@ class _GradientButtonState extends State<GradientButton>
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
                           strokeWidth: 2,
                         ),
                       ),

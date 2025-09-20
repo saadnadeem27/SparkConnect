@@ -84,7 +84,7 @@ class _CustomTextFieldState extends State<CustomTextField>
     setState(() {
       _isFocused = _focusNode.hasFocus;
     });
-    
+
     if (_isFocused) {
       _animationController.forward();
     } else {
@@ -132,8 +132,8 @@ class _CustomTextFieldState extends State<CustomTextField>
               inputFormatters: widget.inputFormatters,
               textCapitalization: widget.textCapitalization,
               style: AppTextStyles.bodyMedium.copyWith(
-                color: widget.enabled 
-                    ? AppColors.textPrimary 
+                color: widget.enabled
+                    ? AppColors.textPrimary
                     : AppColors.textSecondary,
               ),
               decoration: InputDecoration(
@@ -143,15 +143,15 @@ class _CustomTextFieldState extends State<CustomTextField>
                 ),
                 labelText: widget.labelText,
                 labelStyle: AppTextStyles.bodyMedium.copyWith(
-                  color: _isFocused 
-                      ? AppColors.primaryColor 
+                  color: _isFocused
+                      ? AppColors.primaryColor
                       : AppColors.textSecondary,
                 ),
                 prefixIcon: widget.prefixIcon != null
                     ? Icon(
                         widget.prefixIcon,
-                        color: _isFocused 
-                            ? AppColors.primaryColor 
+                        color: _isFocused
+                            ? AppColors.primaryColor
                             : AppColors.textSecondary,
                         size: 20,
                       )
@@ -160,8 +160,8 @@ class _CustomTextFieldState extends State<CustomTextField>
                     ? IconButton(
                         icon: Icon(
                           widget.suffixIcon,
-                          color: _isFocused 
-                              ? AppColors.primaryColor 
+                          color: _isFocused
+                              ? AppColors.primaryColor
                               : AppColors.textSecondary,
                           size: 20,
                         ),
@@ -169,8 +169,8 @@ class _CustomTextFieldState extends State<CustomTextField>
                       )
                     : null,
                 filled: true,
-                fillColor: widget.enabled 
-                    ? (_isFocused 
+                fillColor: widget.enabled
+                    ? (_isFocused
                         ? AppColors.surfaceColor.withOpacity(0.8)
                         : AppColors.surfaceColor)
                     : AppColors.surfaceColor.withOpacity(0.5),

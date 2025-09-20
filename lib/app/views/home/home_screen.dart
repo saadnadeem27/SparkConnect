@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
-  
+
   // Static data for demonstration
   final List<Map<String, dynamic>> staticPosts = [
     {
@@ -24,11 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
         'id': 'user1',
         'username': 'john_doe',
         'displayName': 'John Doe',
-        'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
         'isVerified': true,
       },
-      'content': 'Just finished an amazing workout! 💪 Feeling stronger every day. What\'s your fitness goal for this month? #fitness #motivation #workout',
-      'imageUrl': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
+      'content':
+          'Just finished an amazing workout! 💪 Feeling stronger every day. What\'s your fitness goal for this month? #fitness #motivation #workout',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
       'videoUrl': null,
       'likesCount': 1234,
       'commentsCount': 56,
@@ -44,11 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
         'id': 'user2',
         'username': 'sarah_photography',
         'displayName': 'Sarah Wilson',
-        'profileImage': 'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1494790108755-2616b612b0e5?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
-      'content': 'Golden hour magic ✨ There\'s something special about this time of day that makes everything look beautiful. Shot this during my evening walk in the park.',
-      'imageUrl': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
+      'content':
+          'Golden hour magic ✨ There\'s something special about this time of day that makes everything look beautiful. Shot this during my evening walk in the park.',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
       'videoUrl': null,
       'likesCount': 2847,
       'commentsCount': 89,
@@ -64,11 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
         'id': 'user3',
         'username': 'tech_explorer',
         'displayName': 'Alex Chen',
-        'profileImage': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
         'isVerified': true,
       },
-      'content': 'Just released my new app! 🚀 It\'s been months of hard work, late nights, and countless cups of coffee. So excited to share it with the world! Link in bio.',
-      'imageUrl': 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=400&fit=crop',
+      'content':
+          'Just released my new app! 🚀 It\'s been months of hard work, late nights, and countless cups of coffee. So excited to share it with the world! Link in bio.',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=600&h=400&fit=crop',
       'videoUrl': null,
       'likesCount': 891,
       'commentsCount': 34,
@@ -84,11 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
         'id': 'user4',
         'username': 'foodie_adventures',
         'displayName': 'Emma Rodriguez',
-        'profileImage': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+        'profileImage':
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
         'isVerified': false,
       },
-      'content': 'Homemade pasta night! 🍝 Nothing beats fresh ingredients and a little love in the kitchen. Recipe in the comments!',
-      'imageUrl': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=400&fit=crop',
+      'content':
+          'Homemade pasta night! 🍝 Nothing beats fresh ingredients and a little love in the kitchen. Recipe in the comments!',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=400&fit=crop',
       'videoUrl': null,
       'likesCount': 567,
       'commentsCount': 78,
@@ -164,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(width: 8),
             ],
           ),
-          
+
           // Stories Section
           SliverToBoxAdapter(
             child: Container(
@@ -172,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const StoryList(),
             ),
           ),
-          
+
           // Posts Feed
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -214,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
               childCount: staticPosts.length,
             ),
           ),
-          
+
           // Bottom padding for navigation bar
           const SliverToBoxAdapter(
             child: SizedBox(height: 100),

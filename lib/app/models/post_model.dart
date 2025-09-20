@@ -60,14 +60,14 @@ class PostModel {
       id: json['id'] as String,
       userId: json['user_id'] as String,
       content: json['content'] as String,
-      imageUrls: json['image_urls'] != null 
+      imageUrls: json['image_urls'] != null
           ? List<String>.from(json['image_urls'] as List)
           : null,
       videoUrl: json['video_url'] as String?,
-      hashtags: json['hashtags'] != null 
+      hashtags: json['hashtags'] != null
           ? List<String>.from(json['hashtags'] as List)
           : null,
-      mentions: json['mentions'] != null 
+      mentions: json['mentions'] != null
           ? List<String>.from(json['mentions'] as List)
           : null,
       likesCount: json['likes_count'] as int? ?? 0,
@@ -82,7 +82,7 @@ class PostModel {
       likesVisible: json['likes_visible'] as bool? ?? true,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
-      user: json['profiles'] != null 
+      user: json['profiles'] != null
           ? UserModel.fromJson(json['profiles'] as Map<String, dynamic>)
           : null,
     );
@@ -235,19 +235,19 @@ class PostModel {
   /// Get content with formatted hashtags and mentions
   String get formattedContent {
     String formatted = content;
-    
+
     // Replace hashtags
     final hashtagRegex = RegExp(r'#\w+');
     formatted = formatted.replaceAllMapped(hashtagRegex, (match) {
       return match.group(0)!; // You can add styling here if needed
     });
-    
+
     // Replace mentions
     final mentionRegex = RegExp(r'@\w+');
     formatted = formatted.replaceAllMapped(mentionRegex, (match) {
       return match.group(0)!; // You can add styling here if needed
     });
-    
+
     return formatted;
   }
 

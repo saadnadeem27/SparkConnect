@@ -30,9 +30,10 @@ class AuthService extends GetxService {
     super.onInit();
     _supabase = SupabaseService.client;
     _googleSignIn = GoogleSignIn(
-      serverClientId: 'YOUR_GOOGLE_SERVER_CLIENT_ID', // Replace with your Google client ID
+      serverClientId:
+          'YOUR_GOOGLE_SERVER_CLIENT_ID', // Replace with your Google client ID
     );
-    
+
     // Listen to auth state changes
     _supabase.auth.onAuthStateChange.listen((data) {
       _currentUser.value = data.session?.user;
@@ -49,7 +50,7 @@ class AuthService extends GetxService {
   }) async {
     try {
       _isLoading.value = true;
-      
+
       final response = await _supabase.auth.signInWithPassword(
         email: email,
         password: password,
@@ -83,7 +84,7 @@ class AuthService extends GetxService {
   }) async {
     try {
       _isLoading.value = true;
-      
+
       final response = await _supabase.auth.signUp(
         email: email,
         password: password,
@@ -95,14 +96,14 @@ class AuthService extends GetxService {
 
       if (response.user != null) {
         AppLogger.success('User signed up successfully');
-        
+
         // Create user profile in the database
         await _createUserProfile(
           userId: response.user!.id,
           email: email,
           displayName: displayName,
         );
-        
+
         return response;
       } else {
         AppLogger.error('Sign up failed: No user returned');
@@ -125,14 +126,15 @@ class AuthService extends GetxService {
   Future<AuthResponse?> signInWithGoogle() async {
     try {
       _isLoading.value = true;
-      
+
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
         AppLogger.info('Google sign in cancelled by user');
         return null;
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final String? accessToken = googleAuth.accessToken;
       final String? idToken = googleAuth.idToken;
 
@@ -149,10 +151,10 @@ class AuthService extends GetxService {
 
       if (response.user != null) {
         AppLogger.success('User signed in with Google successfully');
-        
+
         // Check if user profile exists, if not create one
         await _ensureUserProfile(response.user!);
-        
+
         return response;
       } else {
         AppLogger.error('Google sign in failed: No user returned');
@@ -171,7 +173,7 @@ class AuthService extends GetxService {
   Future<AuthResponse?> signInWithApple() async {
     try {
       _isLoading.value = true;
-      
+
       final rawNonce = _generateNonce();
       final nonce = sha256.convert(utf8.encode(rawNonce)).toString();
 
@@ -191,10 +193,10 @@ class AuthService extends GetxService {
 
       if (response.user != null) {
         AppLogger.success('User signed in with Apple successfully');
-        
+
         // Check if user profile exists, if not create one
         await _ensureUserProfile(response.user!);
-        
+
         return response;
       } else {
         AppLogger.error('Apple sign in failed: No user returned');
@@ -213,7 +215,7 @@ class AuthService extends GetxService {
   Future<bool> resetPassword(String email) async {
     try {
       _isLoading.value = true;
-      
+
       await _supabase.auth.resetPasswordForEmail(email);
       AppLogger.success('Password reset email sent');
       Get.snackbar('Success', 'Password reset email sent. Check your inbox.');
@@ -235,10 +237,10 @@ class AuthService extends GetxService {
   Future<void> signOut() async {
     try {
       _isLoading.value = true;
-      
+
       await _supabase.auth.signOut();
       await _googleSignIn.signOut();
-      
+
       _currentUser.value = null;
       AppLogger.success('User signed out successfully');
     } catch (e) {
@@ -257,7 +259,7 @@ class AuthService extends GetxService {
   }) async {
     try {
       final username = _generateUsername(displayName);
-      
+
       await _supabase.from('profiles').insert({
         'id': userId,
         'email': email,
@@ -273,7 +275,7 @@ class AuthService extends GetxService {
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
       });
-      
+
       AppLogger.success('User profile created successfully');
     } catch (e) {
       AppLogger.error('Failed to create user profile: $e');
@@ -294,10 +296,10 @@ class AuthService extends GetxService {
         await _createUserProfile(
           userId: user.id,
           email: user.email ?? '',
-          displayName: user.userMetadata?['display_name'] ?? 
-                      user.userMetadata?['full_name'] ?? 
-                      user.email?.split('@').first ?? 
-                      'User',
+          displayName: user.userMetadata?['display_name'] ??
+              user.userMetadata?['full_name'] ??
+              user.email?.split('@').first ??
+              'User',
         );
       }
     } catch (e) {
@@ -314,20 +316,22 @@ class AuthService extends GetxService {
 
   /// Generate nonce for Apple Sign In
   String _generateNonce([int length = 32]) {
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
   }
 
   /// Update user password
   Future<bool> updatePassword(String newPassword) async {
     try {
       _isLoading.value = true;
-      
+
       await _supabase.auth.updateUser(
         UserAttributes(password: newPassword),
       );
-      
+
       AppLogger.success('Password updated successfully');
       Get.snackbar('Success', 'Password updated successfully');
       return true;
@@ -348,18 +352,18 @@ class AuthService extends GetxService {
   Future<bool> deleteAccount() async {
     try {
       _isLoading.value = true;
-      
+
       // Delete user profile and related data
       if (userId != null) {
         await _supabase.from('profiles').delete().eq('id', userId!);
       }
-      
+
       // Delete user account (this might require admin privileges)
       // Note: Supabase doesn't provide direct user deletion from client
       // You might need to implement this on your backend
-      
+
       await signOut();
-      
+
       AppLogger.success('Account deleted successfully');
       Get.snackbar('Success', 'Account deleted successfully');
       return true;

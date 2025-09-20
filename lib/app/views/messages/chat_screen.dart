@@ -13,10 +13,10 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+
   // Get conversation data from arguments
   late Map<String, dynamic> conversation;
-  
+
   // Mock messages data
   List<Map<String, dynamic>> messages = [];
 
@@ -39,27 +39,31 @@ class _ChatScreenState extends State<ChatScreen> {
       {
         'id': 'msg2',
         'text': 'I\'m good! Just finished work. How about you?',
-        'timestamp': DateTime.now().subtract(const Duration(hours: 2, minutes: 55)),
+        'timestamp':
+            DateTime.now().subtract(const Duration(hours: 2, minutes: 55)),
         'isFromMe': true,
         'type': 'text',
       },
       {
         'id': 'msg3',
         'text': 'Great! I\'m planning a weekend trip. Want to join?',
-        'timestamp': DateTime.now().subtract(const Duration(hours: 1, minutes: 45)),
+        'timestamp':
+            DateTime.now().subtract(const Duration(hours: 1, minutes: 45)),
         'isFromMe': false,
         'type': 'text',
       },
       {
         'id': 'msg4',
         'text': 'That sounds amazing! Where are you thinking of going?',
-        'timestamp': DateTime.now().subtract(const Duration(hours: 1, minutes: 40)),
+        'timestamp':
+            DateTime.now().subtract(const Duration(hours: 1, minutes: 40)),
         'isFromMe': true,
         'type': 'text',
       },
       {
         'id': 'msg5',
-        'text': 'I was thinking about the mountains. The weather should be perfect!',
+        'text':
+            'I was thinking about the mountains. The weather should be perfect!',
         'timestamp': DateTime.now().subtract(const Duration(minutes: 30)),
         'isFromMe': false,
         'type': 'text',
@@ -105,8 +109,9 @@ class _ChatScreenState extends State<ChatScreen> {
   String _formatTimestamp(DateTime timestamp) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final messageDate = DateTime(timestamp.year, timestamp.month, timestamp.day);
-    
+    final messageDate =
+        DateTime(timestamp.year, timestamp.month, timestamp.day);
+
     if (messageDate == today) {
       return '${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}';
     } else {
@@ -116,11 +121,13 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = conversation['user'] ?? {
-      'username': 'User',
-      'profileImage': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-      'isOnline': true,
-    };
+    final user = conversation['user'] ??
+        {
+          'username': 'User',
+          'profileImage':
+              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+          'isOnline': true,
+        };
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -212,9 +219,13 @@ class _ChatScreenState extends State<ChatScreen> {
               itemBuilder: (context, index) {
                 final message = messages[index];
                 final isFromMe = message['isFromMe'];
-                final showTimestamp = index == 0 || 
-                    messages[index - 1]['timestamp'].difference(message['timestamp']).inMinutes.abs() > 5;
-                
+                final showTimestamp = index == 0 ||
+                    messages[index - 1]['timestamp']
+                            .difference(message['timestamp'])
+                            .inMinutes
+                            .abs() >
+                        5;
+
                 return Column(
                   children: [
                     if (showTimestamp)
@@ -237,7 +248,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           if (!isFromMe) ...[
                             CircleAvatar(
                               radius: 16,
-                              backgroundImage: NetworkImage(user['profileImage']),
+                              backgroundImage:
+                                  NetworkImage(user['profileImage']),
                             ),
                             const SizedBox(width: 8),
                           ],
@@ -263,7 +275,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Text(
                                 message['text'],
                                 style: AppTextStyles.bodyMedium.copyWith(
-                                  color: isFromMe ? Colors.white : Colors.black87,
+                                  color:
+                                      isFromMe ? Colors.white : Colors.black87,
                                 ),
                               ),
                             ),
@@ -278,7 +291,7 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
-          
+
           // Message Input
           Container(
             padding: const EdgeInsets.all(16),
