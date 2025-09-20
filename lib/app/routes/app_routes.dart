@@ -9,6 +9,10 @@ import '../views/messages/chat_screen.dart';
 import '../views/stories/story_viewer_screen.dart';
 import '../views/settings/settings_screen.dart';
 import '../views/main_navigation_screen.dart';
+import '../views/splash_screen.dart';
+import '../views/auth/login_screen.dart';
+import '../views/auth/signup_screen.dart';
+import '../views/auth/forgot_password_screen.dart';
 
 /// Application routes for navigation
 class AppRoutes {
@@ -23,6 +27,7 @@ class AppRoutes {
 
   // Main app routes
   static const String home = '/home';
+  static const String main = '/main';
   static const String profile = '/profile';
   static const String editProfile = '/edit-profile';
   static const String createPost = '/create-post';
@@ -67,6 +72,26 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(
       name: initial,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
+      name: splash,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
+      name: login,
+      page: () => const LoginScreen(),
+    ),
+    GetPage(
+      name: signUp,
+      page: () => const SignUpScreen(),
+    ),
+    GetPage(
+      name: forgotPassword,
+      page: () => const ForgotPasswordScreen(),
+    ),
+    GetPage(
+      name: '/main',
       page: () => const MainNavigationScreen(),
     ),
     GetPage(

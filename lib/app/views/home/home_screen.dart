@@ -159,6 +159,71 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 26,
                 ),
               ),
+              // Debug Menu for Navigation Testing
+              PopupMenuButton<String>(
+                icon: const Icon(
+                  Icons.more_vert,
+                  color: Colors.white,
+                ),
+                onSelected: (value) {
+                  switch (value) {
+                    case 'splash':
+                      Get.toNamed('/splash');
+                      break;
+                    case 'login':
+                      Get.toNamed('/login');
+                      break;
+                    case 'signup':
+                      Get.toNamed('/signup');
+                      break;
+                    case 'forgot':
+                      Get.toNamed('/forgot-password');
+                      break;
+                  }
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 'splash',
+                    child: Row(
+                      children: [
+                        Icon(Icons.start_outlined),
+                        SizedBox(width: 8),
+                        Text('Splash Screen'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 'login',
+                    child: Row(
+                      children: [
+                        Icon(Icons.login),
+                        SizedBox(width: 8),
+                        Text('Login Screen'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 'signup',
+                    child: Row(
+                      children: [
+                        Icon(Icons.person_add),
+                        SizedBox(width: 8),
+                        Text('Sign Up Screen'),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 'forgot',
+                    child: Row(
+                      children: [
+                        Icon(Icons.lock_reset),
+                        SizedBox(width: 8),
+                        Text('Forgot Password'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(width: 8),
             ],
           ),

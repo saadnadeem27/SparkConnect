@@ -140,10 +140,10 @@ class LoginScreen extends StatelessWidget {
                           // Sign In Button
                           Obx(() => GradientButton(
                                 text: 'Sign In',
-                                onPressed: authController.isLoading.value
+                                onPressed: authController.isLoading
                                     ? null
                                     : authController.signInWithEmailAndPassword,
-                                isLoading: authController.isLoading.value,
+                                isLoading: authController.isLoading,
                               )),
 
                           const SizedBox(height: AppConstants.largePadding),

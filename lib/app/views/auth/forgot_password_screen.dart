@@ -173,7 +173,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             Obx(() => GradientButton(
                                   text: 'Send Reset Link',
                                   onPressed: _resetPassword,
-                                  isLoading: _authController.isLoading.value,
+                                  isLoading: _authController.isLoading,
                                   gradient: AppColors.primaryGradient,
                                 )),
 

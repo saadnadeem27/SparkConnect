@@ -188,7 +188,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: [
                     // Cover Image & Profile Picture
                     Stack(
-                      clipBehavior: Clip.none, // Allow overflow for profile image
+                      clipBehavior:
+                          Clip.none, // Allow overflow for profile image
                       children: [
                         // Cover Image
                         Container(
@@ -205,11 +206,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                         // Profile Picture with improved positioning
                         Positioned(
                           bottom: -60, // Adjusted for better overlap
-                          left: MediaQuery.of(context).size.width * 0.05, // Responsive positioning
+                          left: MediaQuery.of(context).size.width *
+                              0.05, // Responsive positioning
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 5), // Thicker border
+                              border: Border.all(
+                                  color: Colors.white,
+                                  width: 5), // Thicker border
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.3),
@@ -221,7 +225,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ),
                             child: CircleAvatar(
                               radius: 60, // Larger radius for better visibility
-                              backgroundColor: Colors.grey[300], // Fallback color
+                              backgroundColor:
+                                  Colors.grey[300], // Fallback color
                               child: ClipOval(
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 300),
@@ -251,7 +256,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         ),
                                       );
                                     },
-                                    loadingBuilder: (context, child, loadingProgress) {
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
                                       if (loadingProgress == null) return child;
                                       return Container(
                                         width: 120,
@@ -268,12 +274,17 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         ),
                                         child: Center(
                                           child: CircularProgressIndicator(
-                                            value: loadingProgress.expectedTotalBytes != null
-                                                ? loadingProgress.cumulativeBytesLoaded /
-                                                    loadingProgress.expectedTotalBytes!
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    loadingProgress
+                                                        .expectedTotalBytes!
                                                 : null,
                                             strokeWidth: 3,
-                                            valueColor: AlwaysStoppedAnimation<Color>(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
                                               AppColors.primaryColor,
                                             ),
                                           ),
@@ -313,7 +324,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                         // Edit Profile Picture Button
                         Positioned(
                           bottom: -40,
-                          left: MediaQuery.of(context).size.width * 0.05 + 80, // Responsive positioning over profile image
+                          left: MediaQuery.of(context).size.width * 0.05 +
+                              80, // Responsive positioning over profile image
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColors.primaryColor,
@@ -343,7 +355,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ],
                     ),
 
-                    const SizedBox(height: 80), // Increased spacing to accommodate larger profile image
+                    const SizedBox(
+                        height:
+                            80), // Increased spacing to accommodate larger profile image
 
                     // User Info with fade-in animation
                     AnimatedOpacity(
@@ -384,97 +398,98 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ],
                             ),
 
-                          const SizedBox(height: 4),
+                            const SizedBox(height: 4),
 
-                          Text(
-                            '@${currentUser['username']}',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          Text(
-                            currentUser['bio'],
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textPrimary,
-                              height: 1.4,
-                            ),
-                          ),
-
-                          const SizedBox(height: 16),
-
-                          // Stats Row
-                          Row(
-                            children: [
-                              _buildStatItem(
-                                  'Posts', currentUser['postsCount']),
-                              const SizedBox(width: 24),
-                              GestureDetector(
-                                onTap: () => Get.toNamed('/followers'),
-                                child: _buildStatItem(
-                                    'Followers', currentUser['followersCount']),
+                            Text(
+                              '@${currentUser['username']}',
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: AppColors.textSecondary,
                               ),
-                              const SizedBox(width: 24),
-                              GestureDetector(
-                                onTap: () => Get.toNamed('/following'),
-                                child: _buildStatItem(
-                                    'Following', currentUser['followingCount']),
+                            ),
+
+                            const SizedBox(height: 12),
+
+                            Text(
+                              currentUser['bio'],
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: AppColors.textPrimary,
+                                height: 1.4,
                               ),
-                            ],
-                          ),
+                            ),
 
-                          const SizedBox(height: 20),
+                            const SizedBox(height: 16),
 
-                          // Action Buttons
-                          Row(
-                            children: [
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () => Get.toNamed('/edit-profile'),
+                            // Stats Row
+                            Row(
+                              children: [
+                                _buildStatItem(
+                                    'Posts', currentUser['postsCount']),
+                                const SizedBox(width: 24),
+                                GestureDetector(
+                                  onTap: () => Get.toNamed('/followers'),
+                                  child: _buildStatItem('Followers',
+                                      currentUser['followersCount']),
+                                ),
+                                const SizedBox(width: 24),
+                                GestureDetector(
+                                  onTap: () => Get.toNamed('/following'),
+                                  child: _buildStatItem('Following',
+                                      currentUser['followingCount']),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 20),
+
+                            // Action Buttons
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => Get.toNamed('/edit-profile'),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
+                                      decoration: BoxDecoration(
+                                        gradient: AppColors.primaryGradient,
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Text(
+                                        'Edit Profile',
+                                        style:
+                                            AppTextStyles.bodyMedium.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                GestureDetector(
+                                  onTap: () => Get.toNamed('/settings'),
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
+                                    padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      gradient: AppColors.primaryGradient,
+                                      border: Border.all(
+                                          color: AppColors.borderColor),
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    child: Text(
-                                      'Edit Profile',
-                                      style: AppTextStyles.bodyMedium.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      textAlign: TextAlign.center,
+                                    child: Icon(
+                                      Icons.settings_outlined,
+                                      color: AppColors.textPrimary,
+                                      size: 20,
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: 12),
-                              GestureDetector(
-                                onTap: () => Get.toNamed('/settings'),
-                                child: Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColors.borderColor),
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Icon(
-                                    Icons.settings_outlined,
-                                    color: AppColors.textPrimary,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
 
-                          const SizedBox(height: 20),
-                        ],
-                      ),
-                    ), // Close Padding
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ), // Close Padding
                     ), // Close AnimatedOpacity
                   ],
                 ),

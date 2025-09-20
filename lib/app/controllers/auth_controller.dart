@@ -10,12 +10,14 @@ class AuthController extends GetxController {
   final RxBool _isGoogleLoading = false.obs;
   final RxBool _isAppleLoading = false.obs;
   final Rxn<UserModel> _currentUser = Rxn<UserModel>();
-  final RxBool _isAuthenticated = true.obs; // Set to true for demo
+  final RxBool _isAuthenticated =
+      false.obs; // Set to true temporarily to skip auth flow
 
   // Form controllers for login/signup
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
 
@@ -33,7 +35,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     // Set up a mock current user for demo
     _currentUser.value = UserModel(
       id: 'demo_user',
@@ -41,7 +43,8 @@ class AuthController extends GetxController {
       username: 'john_doe',
       displayName: 'John Doe',
       bio: 'Demo user for SparkConnect',
-      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
+      avatarUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
       isVerified: false,
@@ -85,33 +88,32 @@ class AuthController extends GetxController {
   // Check auth and navigate for splash screen
   Future<void> checkAuthAndNavigate() async {
     await Future.delayed(const Duration(seconds: 3));
-    
+
     if (_isAuthenticated.value) {
-      Get.offAllNamed(AppRoutes.initial);
+      Get.offAllNamed(AppRoutes.main);
     } else {
       Get.offAllNamed(AppRoutes.login);
     }
-  }
+  } // Mock login method
 
-  // Mock login method
   Future<void> signInWithEmailAndPassword() async {
     _isLoading.value = true;
-    
+
     // Simulate API call
     await Future.delayed(const Duration(seconds: 2));
-    
+
     _isAuthenticated.value = true;
     _isLoading.value = false;
-    
+
     Get.snackbar(
       'Success',
       'Logged in successfully!',
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
-    
+
     // Navigate to main screen
-    Get.offAllNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.main);
   }
 
   // Mock signup method (alias for compatibility)
@@ -122,62 +124,62 @@ class AuthController extends GetxController {
   // Mock signup method
   Future<void> signUpWithEmailAndPassword() async {
     _isLoading.value = true;
-    
+
     // Simulate API call
     await Future.delayed(const Duration(seconds: 2));
-    
+
     _isAuthenticated.value = true;
     _isLoading.value = false;
-    
+
     Get.snackbar(
       'Success',
       'Account created successfully!',
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
-    
+
     // Navigate to main screen
-    Get.offAllNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.main);
   }
 
   // Mock Google sign in
   Future<void> signInWithGoogle() async {
     _isGoogleLoading.value = true;
-    
+
     await Future.delayed(const Duration(seconds: 1));
-    
+
     _isAuthenticated.value = true;
     _isGoogleLoading.value = false;
-    
+
     Get.snackbar(
       'Success',
       'Signed in with Google!',
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
-    
+
     // Navigate to main screen
-    Get.offAllNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.main);
   }
 
   // Mock Apple sign in
   Future<void> signInWithApple() async {
     _isAppleLoading.value = true;
-    
+
     await Future.delayed(const Duration(seconds: 1));
-    
+
     _isAuthenticated.value = true;
     _isAppleLoading.value = false;
-    
+
     Get.snackbar(
       'Success',
       'Signed in with Apple!',
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
-    
+
     // Navigate to main screen
-    Get.offAllNamed(AppRoutes.initial);
+    Get.offAllNamed(AppRoutes.main);
   }
 
   // Mock reset password
@@ -191,14 +193,14 @@ class AuthController extends GetxController {
       );
       return;
     }
-    
+
     _isLoading.value = true;
-    
+
     // Simulate API call
     await Future.delayed(const Duration(seconds: 2));
-    
+
     _isLoading.value = false;
-    
+
     Get.snackbar(
       'Success',
       'Password reset email sent!',
@@ -211,21 +213,21 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     _isAuthenticated.value = false;
     _currentUser.value = null;
-    
+
     // Clear form controllers
     emailController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
     nameController.clear();
     displayNameController.clear();
-    
+
     Get.snackbar(
       'Logged Out',
       'You have been signed out',
       backgroundColor: Colors.orange,
       colorText: Colors.white,
     );
-    
+
     // Navigate to login screen
     Get.offAllNamed(AppRoutes.login);
   }

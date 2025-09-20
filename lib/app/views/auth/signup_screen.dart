@@ -82,13 +82,14 @@ class _SignUpScreenState extends State<SignUpScreen>
   }
 
   void _signUp() async {
-    if (_formKey.currentState!.validate()) {
-      await _authController.signUpWithEmail(
-        _authController.emailController.text,
-        _authController.passwordController.text,
-        _authController.nameController.text,
-      );
-    }
+    // Temporarily skip validation so user can navigate through the frontend demo.
+    // Validators are kept in the code as comments for future use.
+    // if (_formKey.currentState!.validate()) {
+    //   await _authController.signUpWithEmailAndPassword();
+    // }
+    await _authController.signUpWithEmailAndPassword();
+    // After successful mock signup, navigate to main/home screen.
+    Get.offAllNamed('/main');
   }
 
   void _signUpWithGoogle() async {
@@ -99,45 +100,46 @@ class _SignUpScreenState extends State<SignUpScreen>
     await _authController.signInWithApple();
   }
 
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required';
-    }
-    if (!GetUtils.isEmail(value)) {
-      return 'Please enter a valid email';
-    }
-    return null;
-  }
+  // Validator helpers are kept for future use but commented out for the demo
+  // String? _validateEmail(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Email is required';
+  //   }
+  //   if (!GetUtils.isEmail(value)) {
+  //     return 'Please enter a valid email';
+  //   }
+  //   return null;
+  // }
 
-  String? _validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Name is required';
-    }
-    if (value.length < 2) {
-      return 'Name must be at least 2 characters';
-    }
-    return null;
-  }
+  // String? _validateName(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Name is required';
+  //   }
+  //   if (value.length < 2) {
+  //     return 'Name must be at least 2 characters';
+  //   }
+  //   return null;
+  // }
 
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Password is required';
-    }
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters';
-    }
-    return null;
-  }
+  // String? _validatePassword(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Password is required';
+  //   }
+  //   if (value.length < 6) {
+  //     return 'Password must be at least 6 characters';
+  //   }
+  //   return null;
+  // }
 
-  String? _validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
-    }
-    if (value != _authController.passwordController.text) {
-      return 'Passwords do not match';
-    }
-    return null;
-  }
+  // String? _validateConfirmPassword(String? value) {
+  //   if (value == null || value.isEmpty) {
+  //     return 'Please confirm your password';
+  //   }
+  //   if (value != _authController.passwordController.text) {
+  //     return 'Passwords do not match';
+  //   }
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                               prefixIcon: Icons.person_outline,
                               keyboardType: TextInputType.name,
                               textCapitalization: TextCapitalization.words,
-                              validator: _validateName,
+                              // validator: _validateName, // commented for demo
                             ),
 
                             const SizedBox(height: AppConstants.defaultPadding),
@@ -235,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                               labelText: 'Email',
                               prefixIcon: Icons.email_outlined,
                               keyboardType: TextInputType.emailAddress,
-                              validator: _validateEmail,
+                              // validator: _validateEmail, // commented for demo
                             ),
 
                             const SizedBox(height: AppConstants.defaultPadding),
@@ -251,7 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   : Icons.visibility_outlined,
                               obscureText: _obscurePassword,
                               onSuffixIconPressed: _togglePasswordVisibility,
-                              validator: _validatePassword,
+                              // validator: _validatePassword, // commented for demo
                             ),
 
                             const SizedBox(height: AppConstants.defaultPadding),
@@ -269,7 +271,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                               obscureText: _obscureConfirmPassword,
                               onSuffixIconPressed:
                                   _toggleConfirmPasswordVisibility,
-                              validator: _validateConfirmPassword,
+                              // validator: _validateConfirmPassword, // commented for demo
                             ),
 
                             const SizedBox(height: 24),
@@ -278,7 +280,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             Obx(() => GradientButton(
                                   text: 'Create Account',
                                   onPressed: _signUp,
-                                  isLoading: _authController.isLoading.value,
+                                  isLoading: _authController.isLoading,
                                   gradient: AppColors.primaryGradient,
                                 )),
 
@@ -315,30 +317,28 @@ class _SignUpScreenState extends State<SignUpScreen>
 
                             const SizedBox(height: 20),
 
-                            // Social Login Buttons
+                            // Social Login Buttons (use same asset icons as Login)
                             Row(
                               children: [
                                 Expanded(
-                                  child: Obx(() => SocialLoginButton(
-                                        icon: 'google',
-                                        label: 'Google',
-                                        onPressed: _signUpWithGoogle,
-                                        isLoading: _authController
-                                            .isGoogleLoading.value,
-                                      )),
+                                  child: SocialLoginButton(
+                                    icon: 'assets/icons/google.png',
+                                    label: 'Google',
+                                    onPressed: _signUpWithGoogle,
+                                    isLoading: _authController.isGoogleLoading,
+                                  ),
                                 ),
                                 const SizedBox(
                                     width: AppConstants.smallPadding),
                                 Expanded(
-                                  child: Obx(() => SocialLoginButton(
-                                        icon: 'apple',
-                                        label: 'Apple',
-                                        onPressed: _signUpWithApple,
-                                        isLoading: _authController
-                                            .isAppleLoading.value,
-                                        backgroundColor: Colors.black,
-                                        textColor: Colors.white,
-                                      )),
+                                  child: SocialLoginButton(
+                                    icon: 'assets/icons/apple.png',
+                                    label: 'Apple',
+                                    onPressed: _signUpWithApple,
+                                    isLoading: _authController.isAppleLoading,
+                                    backgroundColor: Colors.black,
+                                    textColor: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
